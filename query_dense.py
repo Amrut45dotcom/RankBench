@@ -73,6 +73,7 @@ for qrel in tqdm(dataset.qrels_iter(), desc="Loading qrels"):
 
 qrels = Qrels(qrels_dict)
 run   = Run(run_dict, name="bge_dense")
+run.save("results/dense_run.json")
 
 metrics = evaluate(qrels, run, ["ndcg@10", "mrr@10", "recall@100"])
 

@@ -76,6 +76,7 @@ for qrel in tqdm(dataset.qrels_iter(), desc="Loading qrels"):
 
 qrels = Qrels(qrels_dict)
 run   = Run(run_dict, name="bm25_baseline")
+run.save("results/bm25_run.json")
 
 metrics = evaluate(qrels, run, ["ndcg@10", "mrr@10", "recall@1000"])
 
