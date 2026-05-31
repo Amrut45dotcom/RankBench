@@ -4,6 +4,33 @@ A from-scratch information retrieval benchmark on the MS MARCO Passage corpus, s
 
 **[Demo Video](https://drive.google.com/file/d/1adg2Gtgtj_K7A3T8l1YMlEFPtWOaWBsu/view?usp=sharing)**
 
+---
+
+## Key Results
+
+- Evaluated on MS MARCO Passage — 6,980 queries, 8.8M passage corpus
+- Compared BM25, Dense Retrieval (BGE-large), RRF Hybrid Fusion, and Cross-Encoder Reranking
+- Best result — Dense Retrieval (BGE-large-en-v1.5):
+  - **NDCG@10: 0.7118** — 3.3× improvement over BM25 baseline (0.2141)
+  - **MRR@10: 0.6632**
+  - **Recall@10: 0.8771**
+- All methods statistically significantly better than BM25 (p < 0.05, ranx compare)
+- FastAPI + Gradio interface for live side-by-side comparison across all four strategies
+
+---
+
+## Technical Highlights
+
+- Built end-to-end retrieval benchmark on the 8.8M-passage MS MARCO corpus from scratch
+- Implemented BM25 (bm25s), Dense Retrieval (BGE-large + FAISS), RRF Fusion, and Cross-Encoder Reranking in a layered pipeline
+- Indexed 1M dense passage embeddings with FAISS IndexFlatIP; encoding time ~1.75 GPU-hours
+- Evaluated using NDCG@10, MRR@10, and Recall@10 — standard TREC/MS MARCO IR metrics
+- Statistical significance testing across all method pairs using ranx compare() at p < 0.05
+- FastAPI backend with latency middleware (p50/p95 rolling window) and Gradio frontend
+- Deployed via SSH local port forwarding on a shared university GPU server
+
+---
+
 ![RankBench UI](screenshots/ui_top.png)
 ![Latency Metrics](screenshots/ui_metrics.png)
 
@@ -17,8 +44,10 @@ Evaluated on `msmarco-passage/dev/small` — 6,980 queries, 8.8M passage corpus.
 |---|---|---|---|---|
 | BM25 (bm25s) | 0.2141 | 0.1705 | 0.3613 | 50 ms/q |
 | Dense — BGE-large-en-v1.5 | 0.7118 | 0.6632 | 0.8771 | 127 ms/q |
-| RRF Hybrid | 0.5933 | 0.5266 | 0.8190 | ~0.67 ms/q |
+| RRF Hybrid | 0.5933 | 0.5266 | 0.8190 | ~0.67 ms/q † |
 | Reranker — MiniLM-L-6-v2 | 0.5561 | 0.4824 | 0.8030 | 48 ms/q |
+
+† RRF latency is fusion-only (pure rank merging on pre-computed BM25 + Dense results). End-to-end latency including first-stage retrieval is dominated by BM25 (~50 ms) and Dense (~127 ms).
 
 All methods significantly outperform BM25. Dense significantly outperforms RRF and Reranker on all metrics.
 
@@ -28,28 +57,40 @@ This is a corpus coverage artifact, not a pipeline failure. BM25 retrieves from 
 
 ---
 
-## Pipeline Architecture
+## System Architecture
 
 ```
-Query
-  │
-  ├─► BM25                                     top-1000
-  │     bm25s · Robertson BM25 · 8.8M passages
-  │
-  ├─► Dense Retrieval                          top-1000
-  │     BGE-large-en-v1.5 · FAISS IndexFlatIP
-  │     1M passage subset · cosine similarity
-  │
-  ├─► RRF Fusion                               top-100
-  │     ranx fuse() · min-max normalization
-  │     merges BM25 + Dense ranked lists
-  │
-  └─► Cross-Encoder Reranker                   top-5
-        ms-marco-MiniLM-L-6-v2
-        scores RRF top-100 · (query, passage) pairs
+                    MS MARCO Passage (8.8M passages)
+                              │
+              ┌───────────────┴───────────────┐
+              ▼                               ▼
+        BM25 Index                     FAISS Index
+     (full 8.8M corpus)            (1M passage subset)
+     Robertson BM25 · bm25s       BGE-large-en-v1.5
+              │                               │
+         top-1000                         top-1000
+              └───────────────┬───────────────┘
+                              ▼
+                        RRF Fusion
+                  ranx · min-max norm
+                              │
+                           top-100
+                              ▼
+                   Cross-Encoder Reranker
+                   ms-marco-MiniLM-L-6-v2
+                   (query, passage) pairs
+                              │
+                           top-5
+                              ▼
+                        FastAPI Backend
+                     POST /query · GET /metrics
+                              │
+                              ▼
+                       Gradio Frontend
+                  4-column side-by-side view
 ```
 
-The pipeline is deliberately layered: cheap first-stage retrieval narrows the candidate set, expensive neural scoring runs only on the shortlist. RRF fusion adds ~0.67 ms; the cross-encoder adds ~48 ms — both negligible relative to first-stage retrieval.
+The pipeline is deliberately layered: cheap first-stage retrieval narrows the candidate set, expensive neural scoring runs only on the shortlist. RRF fusion adds ~0.67 ms (rank math only); the cross-encoder adds ~48 ms — both negligible relative to first-stage retrieval cost.
 
 ---
 
@@ -232,3 +273,9 @@ pkill -f "app.py"
 - `corpus.npy` loads the full 8.8M passage texts into RAM (~6 GB). Total API memory footprint at startup is approximately 12 GB.
 - `bm25_run.json` and `dense_run.json` exceed GitHub's 100 MB file limit and are excluded from the repository.
 - Gradio 6.0 moved the `css` parameter from `gr.Blocks()` to `launch()`. On Gradio ≥ 6.0 a deprecation warning is emitted at startup — this does not affect functionality.
+
+---
+
+## Resume Summary
+
+Built an information retrieval benchmark on the 8.8M-passage MS MARCO corpus, comparing BM25, Dense Retrieval (BGE-large), RRF Hybrid Fusion, and Cross-Encoder Reranking end-to-end. Achieved NDCG@10 of 0.7118 using dense retrieval — a 3.3× improvement over the BM25 baseline — with statistical significance testing across all method pairs. Deployed the system as a FastAPI backend with p50/p95 latency tracking and a Gradio frontend for live side-by-side query evaluation.
