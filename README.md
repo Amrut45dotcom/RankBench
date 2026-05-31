@@ -196,8 +196,10 @@ python export_corpus.py
 ### 2. Start the FastAPI backend
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+python -m uvicorn main:app --host 127.0.0.1 --port 8000
 ```
+
+`127.0.0.1` binds to loopback only — the service is not exposed on the network. SSH tunnel is the intended access method (see step 4). Use `python -m uvicorn` rather than bare `uvicorn` to ensure the correct interpreter is used regardless of PATH state.
 
 Wait for `All components loaded. Ready.` in the log before sending queries. Startup loads ~12 GB into memory.
 
@@ -209,10 +211,17 @@ python app.py
 
 ### 4. Access the interface
 
-Open `http://localhost:7860` in your browser. If running on a remote server, use SSH local port forwarding — no server firewall changes required:
+Open `http://localhost:7860` in your browser. If running on a remote server, use SSH local port forwarding — no server ports are opened and no firewall changes are required:
 
 ```bash
 ssh -L 8000:localhost:8000 -L 7860:localhost:7860 <user>@<server>
+```
+
+### 5. Stopping the services
+
+```bash
+pkill -f "uvicorn main:app"
+pkill -f "app.py"
 ```
 
 ---
@@ -222,3 +231,4 @@ ssh -L 8000:localhost:8000 -L 7860:localhost:7860 <user>@<server>
 - Dense index covers 1M of 8.8M passages — full corpus encoding requires ~15.5 GPU-hours. This directly causes RRF and reranker to underperform dense-only retrieval in the current benchmark.
 - `corpus.npy` loads the full 8.8M passage texts into RAM (~6 GB). Total API memory footprint at startup is approximately 12 GB.
 - `bm25_run.json` and `dense_run.json` exceed GitHub's 100 MB file limit and are excluded from the repository.
+- Gradio 6.0 moved the `css` parameter from `gr.Blocks()` to `launch()`. On Gradio ≥ 6.0 a deprecation warning is emitted at startup — this does not affect functionality.
