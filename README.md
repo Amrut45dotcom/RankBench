@@ -276,6 +276,3 @@ pkill -f "app.py"
 
 ---
 
-## Resume Summary
-
-Built an information retrieval benchmark on the 8.8M-passage MS MARCO corpus, comparing BM25, Dense Retrieval (BGE-large), RRF Hybrid Fusion, and Cross-Encoder Reranking end-to-end. Achieved NDCG@10 of 0.7118 using dense retrieval — a 3.3× improvement over the BM25 baseline — with statistical significance testing across all method pairs. Deployed the system as a FastAPI backend with p50/p95 latency tracking and a Gradio frontend for live side-by-side query evaluation.
