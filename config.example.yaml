@@ -1,0 +1,7 @@
+data_root: /home/USER/RankBench
+corpus_path: /home/USER/RankBench/corpus.npy
+embeddings_dir: /home/USER/RankBench/embeddings
+faiss_index_dir: /home/USER/RankBench/faiss_index
+bm25_index_dir: /home/USER/RankBench/bm25_index
+output_dir: /home/USER/rankbench_v2/results/matched_1m
+seed: 42
