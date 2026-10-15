@@ -1,0 +1,15 @@
+{
+  "dataset": "msmarco-passage/dev/small",
+  "pid_list_path": "embeddings/pid_list.npy",
+  "pid_list_sha256": "49dd5e017d43903b6cedd493abf1433fdb96ae01c5e726c4ce1bcacead7fe113",
+  "subset_size": 1000000,
+  "subset_unique": 1000000,
+  "num_queries": 6980,
+  "num_queries_with_qrels": 6980,
+  "num_relevant_pids": 7433,
+  "relevant_pids_in_subset": 7433,
+  "queries_fully_covered": 6980,
+  "queries_partially_covered": 0,
+  "queries_not_covered": 0,
+  "not_covered_query_ids": []
+}
