@@ -19,7 +19,7 @@ import faiss
 import torch
 import bm25s
 import ir_datasets
-from ranx import Qrels, Run, evaluate
+from ranx import Qrels, Run, evaluate, fuse
 from sentence_transformers import SentenceTransformer, CrossEncoder
 
 ROOT = os.path.expanduser(CFG["data_root"])
@@ -81,7 +81,7 @@ def dense_model():
 def reranker():
     global _reranker
     if _reranker is None:
-        _reranker = CrossEncoder(CFG["models"]["reranker"], device=dev_device)
+                _reranker = CrossEncoder(CFG["models"]["reranker"], device=dev_device, max_length=512)
     return _reranker
 
 
@@ -114,15 +114,13 @@ def dense_search(qids, k):
     return out
 
 def rrf_fuse(bm, de, k_const, out_k):
-    fused = {}
-    for q in bm:
-        sc = {}
-        for lst in (bm[q], de[q]):
-            for rank, (pid, _) in enumerate(lst, start=1):
-                sc[pid] = sc.get(pid, 0.0) + 1.0 / (k_const + rank)
-        top = sorted(sc.items(), key=lambda x: -x[1])[:out_k]
-        fused[q] = top
-    return fused
+    runs = [
+        Run({q: {p: s for p, s in lst} for q, lst in bm.items()}, name="bm25"),
+        Run({q: {p: s for p, s in lst} for q, lst in de.items()}, name="dense"),
+    ]
+    fused = fuse(runs=runs, norm="min-max", method="rrf", params={"k": k_const})
+    return {q: sorted(docs.items(), key=lambda x: -x[1])[:out_k]
+            for q, docs in fused.to_dict().items()}
 
 def rerank(qids, cands, depth):
     pairs, owners = [], []
