@@ -88,8 +88,12 @@ def reranker():
 # ---------- retrieval primitives (all take lists of qids) ----------
 def bm25_search(qids, k):
     texts = [ALL_QTEXT[q] for q in qids]
-    toks = bm25s.tokenize(texts, stopwords=CFG["bm25_tokenize"]["stopwords"],
-                          stemmer=_stem, return_as="string", show_progress=False)
+    try:
+        toks = bm25s.tokenize(texts, stopwords=CFG["bm25_tokenize"]["stopwords"],
+                              stemmer=_stem, return_as="string", show_progress=False)
+    except TypeError:   # older bm25s without return_as
+        toks = bm25s.tokenize(texts, stopwords=CFG["bm25_tokenize"]["stopwords"],
+                              stemmer=_stem, return_ids=False, show_progress=False)
     idx, sc = bm25.retrieve(toks, k=k, n_threads=CFG["hardware"]["bm25_threads"],
                             show_progress=False)
     return {q: [(pid_list[i], float(s)) for i, s in zip(idx[r], sc[r])]
