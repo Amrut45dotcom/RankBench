@@ -12,6 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ap = argparse.ArgumentParser()
 ap.add_argument("--config", default=os.path.join(HERE, "config.yaml"))
 ap.add_argument("--n", type=int, default=5, help="how many queries from the split to run")
+ap.add_argument("--offset", type=int, default=0, help="skip this many queries at the start of the split")
 ap.add_argument("--split", default="dev_200.txt", help="file in splits/ to take queries from")
 ap.add_argument("--query", default=None, help="free-text query instead of the split")
 args = ap.parse_args()
@@ -32,6 +33,7 @@ import ir_datasets
 from ranx import Run, fuse
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from groq import Groq
+from validator import validate, clean_citations
 
 ROOT = os.path.expanduser(G0["data_root"])
 SPLITS = os.path.expanduser(G0["paths"]["splits_dir"])
@@ -108,23 +110,30 @@ def retrieve(query, n_out):
 SYSTEM_PROMPT = """You answer questions using only the numbered passages provided.
 Rules:
 1. Use only information stated in the passages. Do not use outside knowledge.
-2. After every sentence of your answer, cite the supporting passage(s), like [P1] or [P1][P3].
+2. After every sentence of your answer, cite the supporting passage(s) using plain square brackets exactly like [P1] or [P1][P3]. Never use any other bracket characters.
 3. Only cite passage numbers that appear in the list.
 4. If the passages do not contain the answer, reply with exactly: INSUFFICIENT_CONTEXT
 5. Keep the answer short: 1 to 3 sentences."""
 
 
-def build_user_message(query, passages):
+RETRY_NOTE = ("\n\nYour previous reply was rejected by an automatic format check ({problems}). "
+              "Reply again following the rules exactly: cite every sentence with plain [P#] brackets, "
+              "cite only the listed passages, or reply with exactly INSUFFICIENT_CONTEXT.")
+REFUSAL_TEXT = "I can't answer this from the available documents."
+
+
+def build_user_message(query, passages, reminder=None):
     block = "\n\n".join(f"[P{i+1}] {p['text']}" for i, p in enumerate(passages))
-    return f"Passages:\n\n{block}\n\nQuestion: {query}"
+    msg = f"Passages:\n\n{block}\n\nQuestion: {query}"
+    return msg + reminder if reminder else msg
 
 
-def call_llm(query, passages):
+def call_llm(query, passages, reminder=None):
     cfg = L1["llm"]
     kwargs = dict(
         model=cfg["model"],
         messages=[{"role": "system", "content": SYSTEM_PROMPT},
-                  {"role": "user", "content": build_user_message(query, passages)}],
+                  {"role": "user", "content": build_user_message(query, passages, reminder)}],
         temperature=cfg["temperature"],
         max_completion_tokens=cfg["max_completion_tokens"],
     )
@@ -142,14 +151,28 @@ def answer(query, qid=None):
     t0 = time.perf_counter()
     passages = retrieve(query, L1["n_passages"])
     t1 = time.perf_counter()
-    text = call_llm(query, passages)
+    raw = call_llm(query, passages)
+    v = validate(raw, len(passages))
+    attempts = 1
+    if v["status"] == "invalid":   # one retry with a note about what was wrong
+        raw = call_llm(query, passages, RETRY_NOTE.format(problems=", ".join(v["reasons"])))
+        v = validate(raw, len(passages))
+        attempts = 2
     t2 = time.perf_counter()
+    if v["status"] == "ok":
+        status, text = "answered", clean_citations(raw).strip()
+    elif v["status"] == "refused":
+        status, text = "refused_by_model", REFUSAL_TEXT
+    else:
+        status, text = "refused_validation_failed", REFUSAL_TEXT
     rel = QRELS.get(qid, {}) if qid else {}
     for p in passages:
         p["is_gold"] = rel.get(p["pid"], 0) > 0 if qid else None
     return {
         "qid": qid, "query": query, "answer": text,
-        "refused": "INSUFFICIENT_CONTEXT" in text,
+        "status": status, "refused": status != "answered",
+        "reasons": v["reasons"], "attempts": attempts,
+        "cited": v["cited"], "raw_answer": raw,
         "passages": passages,
         "retrieval_ms": round((t1 - t0) * 1000, 1),
         "generation_ms": round((t2 - t1) * 1000, 1),
@@ -162,8 +185,10 @@ def show(r):
     for i, p in enumerate(r["passages"]):
         gold = "" if p["is_gold"] is None else ("  <-- relevant" if p["is_gold"] else "")
         print(f"  [P{i+1}] score={p['score']:.2f}{gold}  {p['text'][:140]}...")
-    print(f"ANSWER: {r['answer']}")
-    print(f"refused={r['refused']}  retrieval={r['retrieval_ms']}ms  generation={r['generation_ms']}ms")
+    print(f"RAW MODEL OUTPUT: {r['raw_answer']}")
+    print(f"ANSWER SHOWN TO USER: {r['answer']}")
+    print(f"status={r['status']}  cited={r['cited']}  reasons={r['reasons']}  attempts={r['attempts']}")
+    print(f"retrieval={r['retrieval_ms']}ms  generation={r['generation_ms']}ms")
 
 
 if __name__ == "__main__":
@@ -171,7 +196,7 @@ if __name__ == "__main__":
         jobs = [(None, args.query)]
     else:
         with open(os.path.join(SPLITS, args.split)) as f:
-            qids = [l.strip() for l in f if l.strip()][:args.n]
+            qids = [l.strip() for l in f if l.strip()][args.offset:args.offset + args.n]
         jobs = [(q, QTEXT[q]) for q in qids]
 
     out_path = os.path.join(OUT, "samples.jsonl")
