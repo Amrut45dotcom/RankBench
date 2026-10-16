@@ -1,12 +1,4 @@
-"""Checks the LLM's answer in code instead of trusting the prompt.
 
-What it checks: format and citation existence only.
-  - answer is either exactly INSUFFICIENT_CONTEXT, or a real answer
-  - every cited passage number exists in the passages that were sent
-  - every sentence carries at least one citation
-What it does NOT check: whether the cited passage really supports the claim.
-That is the faithfulness check, done by hand on ~40 answers.
-"""
 import re
 import unicodedata
 
@@ -25,6 +17,17 @@ _CITES_AFTER_PUNCT = re.compile(r"([.!?]+)\s*((?:" + _CITE_GROUP + r"\s*)+)")
 def clean_citations(text):
     """Fix bracket look-alikes only. Safe to show to the user."""
     for bad, good in _BRACKETS.items():
+        text = text.replace(bad, good)
+    return text
+
+
+_HYPHEN_LOOKALIKES = {"\u2010": "-", "\u2011": "-"}  # hyphen, non-breaking hyphen only; en/em dashes are real punctuation
+
+
+def clean_for_display(text):
+    """What the user sees: bracket look-alikes and hyphen look-alikes fixed, nothing else changed."""
+    text = clean_citations(text)
+    for bad, good in _HYPHEN_LOOKALIKES.items():
         text = text.replace(bad, good)
     return text
 

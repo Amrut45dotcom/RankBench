@@ -1,10 +1,3 @@
-"""Level 1, step 1: standalone answer(query). No server, no validator yet.
-
-Run from the data folder:
-    cd ~/RankBench
-    python ~/rankbench_v2/level1/answer.py --n 5
-    python ~/rankbench_v2/level1/answer.py --query "what is the capital of france"
-"""
 import os, sys, json, time, argparse
 import yaml
 
@@ -33,7 +26,7 @@ import ir_datasets
 from ranx import Run, fuse
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from groq import Groq
-from validator import validate, clean_citations
+from validator import validate, clean_for_display
 
 ROOT = os.path.expanduser(G0["data_root"])
 SPLITS = os.path.expanduser(G0["paths"]["splits_dir"])
@@ -160,7 +153,7 @@ def answer(query, qid=None):
         attempts = 2
     t2 = time.perf_counter()
     if v["status"] == "ok":
-        status, text = "answered", clean_citations(raw).strip()
+        status, text = "answered", clean_for_display(raw).strip()
     elif v["status"] == "refused":
         status, text = "refused_by_model", REFUSAL_TEXT
     else:

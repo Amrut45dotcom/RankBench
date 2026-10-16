@@ -1,12 +1,10 @@
-"""Run from the repo root:  python -m unittest level1.test_validator -v
-or from inside level1/:     python -m unittest test_validator -v
-"""
+
 import os
 import sys
 import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from validator import validate, clean_citations  # noqa: E402
+from validator import validate, clean_citations, clean_for_display  # noqa: E402
 
 N = 5
 
@@ -92,6 +90,20 @@ class TestCleanCitations(unittest.TestCase):
 
     def test_other_text_untouched(self):
         self.assertEqual(clean_citations("a\u2011b [P1]"), "a\u2011b [P1]")
+
+
+class TestCleanForDisplay(unittest.TestCase):
+    def test_non_breaking_hyphen_becomes_plain(self):
+        self.assertEqual(clean_for_display("(631) 454\u20118059. [P1]"), "(631) 454-8059. [P1]")
+
+    def test_unicode_hyphen_becomes_plain(self):
+        self.assertEqual(clean_for_display("a\u2010b"), "a-b")
+
+    def test_brackets_still_fixed(self):
+        self.assertEqual(clean_for_display("x【P1】"), "x[P1]")
+
+    def test_en_and_em_dashes_kept(self):
+        self.assertEqual(clean_for_display("2010\u20132015 \u2014 done"), "2010\u20132015 \u2014 done")
 
 
 if __name__ == "__main__":
