@@ -1,4 +1,12 @@
+"""Checks the LLM's answer in code instead of trusting the prompt.
 
+What it checks: format and citation existence only.
+  - answer is either exactly INSUFFICIENT_CONTEXT, or a real answer
+  - every cited passage number exists in the passages that were sent
+  - every sentence carries at least one citation
+What it does NOT check: whether the cited passage really supports the claim.
+That is the faithfulness check, done by hand on ~40 answers.
+"""
 import re
 import unicodedata
 
@@ -46,12 +54,37 @@ def _move_cites_before_punct(text):
     return _CITES_AFTER_PUNCT.sub(lambda m: " " + m.group(2).strip() + m.group(1) + " ", text)
 
 
+_ABBREV = {"mr", "mrs", "ms", "dr", "prof", "sr", "jr", "st", "mt", "vs", "etc", "e.g", "i.e",
+           "no", "inc", "ltd", "co", "corp", "approx", "ca", "fig"}
+_INITIALS = re.compile(r"(?:[A-Za-z]\.)*[A-Za-z]")   # matches F  or  U.S
+
+
+def _split_line(line):
+    """Split one line into sentences without breaking after initials ('John F. Kennedy'),
+    abbreviations ('Dr. Smith', 'U.S. Congress'), or before a lowercase word."""
+    parts, start = [], 0
+    for m in re.finditer(r"[.!?]+\s+", line):
+        before = line[start:m.start()].split()
+        token = before[-1].strip("([\"'") if before else ""
+        nxt = line[m.end():m.end() + 1]
+        if m.group().strip() == "." and (_INITIALS.fullmatch(token) or token.lower() in _ABBREV):
+            continue
+        if nxt.islower():
+            continue
+        parts.append(line[start:m.end()].strip())
+        start = m.end()
+    tail = line[start:].strip()
+    if tail:
+        parts.append(tail)
+    return parts
+
+
 def _split_sentences(text):
     pieces = []
     for line in text.split("\n"):
         line = line.strip()
         if line:
-            pieces.extend(re.split(r"(?<=[.!?])\s+", line))
+            pieces.extend(_split_line(line))
     sentences = []
     for p in pieces:
         p = p.strip()

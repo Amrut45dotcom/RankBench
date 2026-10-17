@@ -1,3 +1,10 @@
+"""Level 1, step 1: standalone answer(query). No server, no validator yet.
+
+Run from the data folder:
+    cd ~/RankBench
+    python ~/rankbench_v2/level1/answer.py --n 5
+    python ~/rankbench_v2/level1/answer.py --query "what is the capital of france"
+"""
 import os, sys, json, time, argparse
 import yaml
 
@@ -147,10 +154,12 @@ def answer(query, qid=None):
     raw = call_llm(query, passages)
     v = validate(raw, len(passages))
     attempts = 1
+    attempt_log = [{"raw": raw, "status": v["status"], "reasons": v["reasons"]}]
     if v["status"] == "invalid":   # one retry with a note about what was wrong
         raw = call_llm(query, passages, RETRY_NOTE.format(problems=", ".join(v["reasons"])))
         v = validate(raw, len(passages))
         attempts = 2
+        attempt_log.append({"raw": raw, "status": v["status"], "reasons": v["reasons"]})
     t2 = time.perf_counter()
     if v["status"] == "ok":
         status, text = "answered", clean_for_display(raw).strip()
@@ -165,7 +174,7 @@ def answer(query, qid=None):
         "qid": qid, "query": query, "answer": text,
         "status": status, "refused": status != "answered",
         "reasons": v["reasons"], "attempts": attempts,
-        "cited": v["cited"], "raw_answer": raw,
+        "cited": v["cited"], "raw_answer": raw, "attempt_log": attempt_log,
         "passages": passages,
         "retrieval_ms": round((t1 - t0) * 1000, 1),
         "generation_ms": round((t2 - t1) * 1000, 1),
@@ -181,6 +190,9 @@ def show(r):
     print(f"RAW MODEL OUTPUT: {r['raw_answer']}")
     print(f"ANSWER SHOWN TO USER: {r['answer']}")
     print(f"status={r['status']}  cited={r['cited']}  reasons={r['reasons']}  attempts={r['attempts']}")
+    if r["attempts"] == 2:
+        a = r["attempt_log"][0]
+        print(f"FIRST ATTEMPT REJECTED ({a['reasons']}): {a['raw'][:300]}")
     print(f"retrieval={r['retrieval_ms']}ms  generation={r['generation_ms']}ms")
 
 

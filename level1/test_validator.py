@@ -1,4 +1,6 @@
-
+"""Run from the repo root:  python -m unittest level1.test_validator -v
+or from inside level1/:     python -m unittest test_validator -v
+"""
 import os
 import sys
 import unittest
@@ -82,6 +84,27 @@ class TestValidate(unittest.TestCase):
         r = validate("[P1]", N)
         self.assertEqual(r["status"], "invalid")
         self.assertIn("no_content", r["reasons"])
+
+
+class TestSentenceSplitting(unittest.TestCase):
+    def test_lga_jfk_regression(self):
+        raw = ("The driving distance between LaGuardia Airport (LGA) and John F. Kennedy "
+               "International Airport (JFK) is 12 miles (19 kilometers)【P1】")
+        self.assertEqual(validate(raw, N)["status"], "ok")
+
+    def test_us_abbreviation(self):
+        self.assertEqual(validate("It was passed by the U.S. Congress in 1950 [P2].", N)["status"], "ok")
+
+    def test_dr_abbreviation(self):
+        self.assertEqual(validate("Dr. Smith wrote the paper [P1].", N)["status"], "ok")
+
+    def test_eg_abbreviation(self):
+        self.assertEqual(validate("Hand tools, e.g. a trowel, are used [P1].", N)["status"], "ok")
+
+    def test_initial_then_real_uncited_sentence(self):
+        r = validate("John F. Kennedy Airport is big [P1]. It is old.", N)
+        self.assertEqual(r["status"], "invalid")
+        self.assertIn("uncited_sentences:1", r["reasons"])
 
 
 class TestCleanCitations(unittest.TestCase):
