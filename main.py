@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import numpy as np
 import faiss
@@ -27,6 +28,10 @@ TOP_K_RRF       = 100    # RRF cut before reranking
 TOP_K_FINAL     = 5      # results returned per strategy
 
 LATENCY_WINDOW  = 100    # rolling window size for /metrics
+
+# Level 1 (/answer): code lives in the tracked repo, data paths come from its config
+LEVEL1_DIR      = os.path.expanduser("~/rankbench_v2/level1")
+LEVEL1_CONFIG   = os.path.join(LEVEL1_DIR, "config.yaml")
 
 # ── Globals populated at startup ──────────────────────────────────────────────
 state = {}
@@ -78,6 +83,22 @@ async def lifespan(app: FastAPI):
     state["corpus"] = corpus
     print(f"       Corpus passages: {len(corpus):,}")
 
+    # Level 1: reuse the models loaded above; only the matched 1M BM25 index
+    # and the Groq client are added. A failure here must not take down /query.
+    print("[startup] Building Level 1 pipeline ...")
+    try:
+        sys.path.insert(0, LEVEL1_DIR)
+        from pipeline import build_pipeline
+        state["l1"] = build_pipeline(
+            LEVEL1_CONFIG,
+            index=state["faiss"], pid_list=state["pid_list"],
+            dense=state["bge"], reranker=state["ce"],
+            get_texts=lambda pids: [corpus[p] for p in pids],
+        )
+        print("       Level 1 pipeline ready.")
+    except Exception as e:
+        print(f"       Level 1 pipeline NOT loaded: {e!r}")
+
     print("[startup] All components loaded. Ready.")
     yield
     state.clear()
@@ -116,6 +137,10 @@ class QueryResponse(BaseModel):
     dense:    StrategyResult
     rrf:      StrategyResult
     reranker: StrategyResult
+
+
+class AnswerRequest(BaseModel):
+    query: str
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -221,6 +246,34 @@ def query(req: QueryRequest):
             latency_ms=round(reranker_ms, 2),
         ),
     )
+
+
+@app.post("/answer")
+def answer_route(req: AnswerRequest):
+    """Level 1: retrieve (matched 1M corpus) -> LLM answer with citations -> validator."""
+    pipe = state.get("l1")
+    if pipe is None:
+        raise HTTPException(status_code=503, detail="Level 1 pipeline not loaded")
+    q = req.query.strip()
+    if not q:
+        raise HTTPException(status_code=400, detail="empty query")
+    try:
+        r = pipe.answer(q)
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"answer failed: {e!r}")
+    return {
+        "query": q,
+        "answer": r["answer"],
+        "status": r["status"],
+        "cited": r["cited"],
+        "passages": [
+            {"label": f"P{i+1}", "pid": p["pid"],
+             "score": round(p["score"], 3), "text": p["text"]}
+            for i, p in enumerate(r["passages"])
+        ],
+        "retrieval_ms": r["retrieval_ms"],
+        "generation_ms": r["generation_ms"],
+    }
 
 
 @app.get("/metrics")
