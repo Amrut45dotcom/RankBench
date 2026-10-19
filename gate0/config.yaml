@@ -29,7 +29,7 @@ bm25_tokenize:            # VERIFY vs 02_build_bm25_1m.py
   stemmer: null           # set to "english" if the index was built with PyStemmer
 
 hardware:
-  gpu_id: 1
+  gpu_id: 2
   faiss_threads: 8
   bm25_threads: 8
 
