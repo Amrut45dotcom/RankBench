@@ -30,12 +30,15 @@ def clean_citations(text):
 
 
 _HYPHEN_LOOKALIKES = {"\u2010": "-", "\u2011": "-"}  # hyphen, non-breaking hyphen only; en/em dashes are real punctuation
+_SPACE_LOOKALIKES = {"\u202f": " ", "\u00a0": " ", "\u2009": " "}  # narrow no-break, no-break, thin space
 
 
 def clean_for_display(text):
-    """What the user sees: bracket look-alikes and hyphen look-alikes fixed, nothing else changed."""
+    """What the user sees: bracket, hyphen and space look-alikes fixed, nothing else changed."""
     text = clean_citations(text)
     for bad, good in _HYPHEN_LOOKALIKES.items():
+        text = text.replace(bad, good)
+    for bad, good in _SPACE_LOOKALIKES.items():
         text = text.replace(bad, good)
     return text
 

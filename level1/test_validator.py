@@ -128,6 +128,10 @@ class TestCleanForDisplay(unittest.TestCase):
     def test_en_and_em_dashes_kept(self):
         self.assertEqual(clean_for_display("2010\u20132015 \u2014 done"), "2010\u20132015 \u2014 done")
 
+    def test_space_lookalikes_become_plain(self):
+        raw = "John\u202fF.\u202fKennedy is 12\u00a0miles\u2009away[P1]"
+        self.assertEqual(clean_for_display(raw), "John F. Kennedy is 12 miles away[P1]")
+
 
 if __name__ == "__main__":
     unittest.main()
