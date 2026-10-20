@@ -1,0 +1,220 @@
+======================================================================
+#1 what is the capital of the country of Vorlundia
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score -0.841) Podgorica is the capital of Montenegro. Covering a total area of 55.6 square miles, Podgorica is the largest city in the country.As estimated in 2011, the capital had a population of 151,312. It is the administrative, economic, cultural and educational center of Montenegro.odgorica is the capital of
+--- P2 (score -1.025) Skopje[Note 1] is the capital and largest city of the Republic of Macedonia. It is the country's political, cultural, economic, and academic center. It was known in the Roman period under the name Scupi. The territory of Skopje has been inhabited since at least 4000 BC; remains of Neolithic settleme
+--- P3 (score -2.39) Brasilia is the capital of Brazil. In 1956, Juscelino Kubitschek de Olveira [September 12, 1902-August 22, 1976], who was President of Brazil, 1956-1961, ordered the building of Brasilia to fulfill an article in Brazil's constiution.
+--- P4 (score -2.677) Brasilia is the capital city of Brazil. The recognition became official on April 21, 1960. In 1956 Juscelino Kubitschek de Olveira [September 12, 1902-August 22, 1976], who wa … s President of Brazil, 1956-1961], ordered the building of Brasilia to fulfill an article in Brazil's constitution.
+--- P5 (score -2.802) Amsterdam is the capital of the Netherlands. With more than one million inhabitants in its urban area, it is the country's largest city and its financial, cultural, and creative centre. Amsterdam derives its name from the city’s origin as “Dam” of river “Amstel”.msterdam is the capital of the Nether
+
+YOUR CALL: 
+======================================================================
+#2 who founded the Ashgrove Institute of Aerodynamic Poetry
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score -3.069) Harriet Monroe, a fellow resident of Chicago, had founded the magazine Poetry in 1912. Monroe liked and encouraged Sandburg's plain-speaking free verse style, strongly reminiscent of Walt Whitman. Chicago Poems established Sandburg as a major figure in contemporary literature.
+--- P2 (score -3.092) Langley Field was named after Samuel Pierpoint Langley, an aerodynamic pioneer and a former Secretary of the Smithsonian Institution. Langley began aerodynamic experiments in 1887 and formed a basis for practical pioneer aviation.
+--- P3 (score -3.812) Share on Facebook Tweet Share Pin Share. Jack Whiteside Parsons was an unusual man. He co-founded both the Jet Propulsion Laboratory and the Aerojet Engineering Corporation, created pyrotechnics for the film industry, wrote a book of poems, and masturbated onto magical tablets in an attempt to conju
+--- P4 (score -3.887) Birstall is the birthplace of Joseph Priestley, the discoverer of oxygen. Priestley was tutored extensively by the then Vicar of Birstall, an Edinburgh man with a keen interest in science. He was also a pupil at Batley Grammar School for Boys, founded in 1612 by the Rev. William Lee.
+--- P5 (score -5.188) In the 1970s, Bernstein co-founded the influential journal L=A=N=G=U=A=G=E. He has also written the librettos for a number of operas with composers such as Ben Yarmolinsky, Brian Ferneyhough, and Dean Drummond. Bernstein serves as the Executive Editor, and co-founder, of The Electronic Poetry Center
+
+YOUR CALL: 
+======================================================================
+#3 what are the side effects of norvenatil
+STATUS: answered
+ANSWER: Norvasc can cause dizziness, drowsiness, nausea, stomach pain or cramps, headache, muscle cramps, weakness, tiredness or low energy, and flushing or a feeling of warmth, with occasional severe effects such as heart pounding, severe stomach cramps, or severe dizziness[P1][P2][P3]
+--- P1 (score 6.955) Infrequent side effects of Norvasc: 1  DizzyLess Severe. 2  DrowsinessLess Severe. 3  Feel Like Throwing UpLess Severe.  Heart Throbbing or PoundingLess 1  Severe. Low EnergyLess Severe.  Stomach CrampsLess 1  Severe. Temporary Redness of Face and NeckLess Severe.
+--- P2 (score 6.814) Norvasc is used to treat hypertension (high blood pressure) and angina (chest pain), either alone or in combination with other medications. Common side effects of Norvasc include dizziness, drowsiness, tiredness, headache, muscle cramps, weakness, nausea, and stomach pain.
+--- P3 (score 6.674) A: Norvasc (amlodipine) is a medication used to treat high blood pressure. Studies show that some of the common side effects are dizziness, headache, and rarely fainting as a result of low blood pressure.Some studies suggest that taking at bedtime can alleviate fainting.he most common side effect of
+--- P4 (score 3.199) They may also have an effect on other neurotransmitters. Serotonin-Norepinephrine Reuptake inhibitors (SNRIs) include desvenlafaxine (Pristiq), duloxetine (Cymbalta), venlafaxine (Effexor), venlafaxine XR (Effexor XR), milnacipran (Savella), and levomilnacipran (Fetzima). Side effects most common to
+--- P5 (score 2.053) It may also be used to treat other conditions including nerve pain, eating disorder, anxiety, and panic disorder. It is available in generic form. The most common side effects of Elavil are drowsiness, dry mouth, dizziness, blurred vision, constipation, weight gain, or trouble urinating.
+
+YOUR CALL: 
+======================================================================
+#4 how many students attend Pemberton-Hale Academy in Nevada
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score -0.371) Colleges/universities with over 2000 students nearest to Fallon: 1  Truckee Meadows Community College (about 55 miles; Reno, NV; Full-time enrollment: 6,919). 2  University of Nevada-Reno (about 56 miles; Reno, NV; FT enrollment: 15,092). 3  Western Nevada College (about 58 miles; Carson City, NV; F
+--- P2 (score -2.567) As demonstrated on the 2011 Nevada Writing Proficiency Exam, 65% of the. eighth grade students will demonstrate proficiency. Principal's Highlights. At Lois & Jerry Tarkanian Middle School we empower all students to achieve.
+--- P3 (score -3.57) For those living in the Las Vegas, Nevada area, there are many career and education opportunities for fitness instructors. There are currently 1,620 jobs for fitness instructors in Nevada and this is projected to grow by 32% to about 2,130 jobs by 2016.
+--- P4 (score -3.748) The amount of students that attend Northwestern University (NU) in Evanston, Illinois, is approximately 19,000. About 8,000 of these students are full-time undergraduates, and… 8,000 are full-time graduate students.
+--- P5 (score -3.839) Approximately 12,800 students attend Duke University. 6,200 undergraduates and around 6,800 post graduate students study at Duke.
+
+YOUR CALL: 
+======================================================================
+#5 what is the balance in my savings account
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score 4.527) Average retirement savings by age. This chart shows average retirement plan account balances by age as of 2014. For people under age 25, the average account balance was $3,865. For people age 25 to age 34, the average account balance was $21,524. For people age 35 to age 44, the average account bala
+--- P2 (score 3.926) According to the SBI bank instructions, the minimum balance required for savings account holders is Rs. 5,000 in metropolitan areas. Similarly, in the urban areas, the customers need to maintain the average monthly balance should be Rs. 3,000.
+--- P3 (score 3.173) The best way to increase the balance in your savings account is to make it a priority to put money there. That means you need to stop thinking about savings as something you do at the end of the month after the bills are paid, and instead think of your savings account as one of the first bills to be
+--- P4 (score 2.258) Your account's available balance is the most current record the bank has about the amount of money available for your next purchase or for you to withdraw. It can change throughout the day, as money moves in and out of your account, because it also includes your pending transactions.
+--- P5 (score 1.857) Get access to your direct deposit up to 3 days earlier than other banks/prepaid card options. To keep the Insight Savings account open, you need to maintain the minimum balance of just $10. While there is a max balance of $5000, the balance may exceed this amount once the interest posts to the accou
+
+YOUR CALL: 
+======================================================================
+#6 what is the email address of the CEO's assistant at my company
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score 0.456) Job Posting: Executive Assistant to the President and CEO. Job Description: Reporting directly to the President and CEO, the Executive Assistant provides. executive support in a one-on-one working relationship. The Executive Assistant serves as the primary. point of contact for internal and external
+--- P2 (score -3.618) 1 Fax Number: All fax communication with the corporate office should be sent to 1-215-981-7790. 2  Email: Though there is no dedicated email address for Comcast headquarters, there is a feedback form suggested by the Senior Vice President of Customer Experience [+] .
+--- P3 (score -3.798) Whether you want to share an experience you've had with our Company or have a question you want answered, we'd like to hear from you! If you prefer to leave an anonymous and confidential message for senior management or the board of directors, call 855-900-0046.
+--- P4 (score -3.876) Stay in touch with us by phone, email, or visiting our locations by looking at our contact info here. Search for: 800.924.0569 (Toll-Free) | 505.877.6967 (Shelter) | 505.217.9586 (Corporate Office)
+--- P5 (score -3.982) Phone Number: The phone number for Google headquarters is 1-650-253-0000. Fax Number: Faxes can be sent to 1-650-253-0001. Email: Contacting Google headquarters or the executive team by email may not be an option, but each of the executives on the Google team has a Google Plus account.
+
+YOUR CALL: 
+======================================================================
+#7 where does my coworker Anita live
+STATUS: answered
+ANSWER: Your coworker Anita lives northwest of the Grand Tree, just west of the swamp, where her house is located. [P1]
+--- P1 (score -1.176) Glough's girlfriend can be found northwest of the Grand Tree, just west of the swamp. Go up the most north-western set of stairs to enter Anita's house. Talk to her and she'll give you the key to Glough's chest. Now head over to Glough's house and find the chest at the east end of the house.
+--- P2 (score -3.539) I first heard about LaCroix from a coworker who grew up outside of Chicago. She waxed poetic about her parents sitting down to sip cold Pamplemousse-flavored sparkling water at the end of the day, which sounded so intriguingly chic, another coworker bought a 12-pack of cans so we could try it oursel
+--- P3 (score -3.909) Gender: Female. Usage: Anita, of Hebrew origin, is a very popular first name. It is more often used as a girl (female) name. People having the name Anita are in general originating from Belgium, Finland, France, Germany, Hungary, Ireland, Italy, Luxembourg, Netherlands, Poland, Spain, United Kingdom
+--- P4 (score -4.26) Anita Lopez, Lucas County Auditor. ​Anita Lopez, Esq. is a licensed State of Ohio attorney and a graduate of the University of Toledo. She is the 7th child of migrant workers who taught her the value of hard work, to be loyal to God and our great country, the USA.
+--- P5 (score -5.472) My coworker from Poland told me about plackis, which are essentially the same thing as latkes without the Chanukah story. I Ate Potato Pancakes Til I Plotzed Emily Shire December 16, 2014. Eric Hughes was having a smoke break and talking to a coworker.
+
+YOUR CALL: 
+======================================================================
+#8 what did my mother say to me this morning
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score 0.983) I would always ask my mom 'What's for dinner?' and the response would be 'I don't know.' I said I was going to make up a dish called 'I don't know' dish. would always ask my mom 'What's for dinner?' and the response would be 'I don't know.' I said I was going to make up a dish called 'I don't know' 
+--- P2 (score -1.074) My mom is a very proper lady. I have never heard a cuss word or a dirty joke pass her lips. She was hilarious after her back surgery. She was asleep so I started to read my book. I glanced over at her and was disconcerted to see her staring at me unblinking. She said, Look they even brought the dog.
+--- P3 (score -1.124) By writing too much you are more likely to end up saying things that are either not appropriate or necessary for the situation. In case you are still at a loss over what to say, her are a few sample sympathy messages for loss of mother: “The memory of your mother will live on in our hearts forever.”
+--- P4 (score -1.24) But then there was constraint in the correspondence—it was submitted to her mother. Night and Morning, Complete Edward Bulwer-Lytton But, placid as she was, my mother was authoritative, and could not endure any kind of constraint.
+--- P5 (score -1.761) My mother had me write a check for her and take it to her bank and cash it. I did so and gave the money to her. I have my husband as a witness. I do not live close to her and was only home on a …
+
+YOUR CALL: 
+======================================================================
+#9 which film won best picture at the 2025 Academy Awards
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score 6.647) The Oscar nominees for best cinematography in a motion picture have been announced by the film academy. They include: They are: Roger Deakins, Blade Runner 2024; Bruno Delbonnel, Darkest Hour; Hoyte van Hoytema, Dunkirk; Rachel Morrison, Mudbound; Dan Laustsen, The Shape of Water.-----5 a.m. The Osc
+--- P2 (score 5.934) Shakespeare in Love far behind in second place. The American public overwhelmingly would like to see Steven Spielberg's Saving Private Ryan win the Oscar this Sunday night as the best picture of the year in the annual Academy Awards ceremonies.
+--- P3 (score 5.231) 'Birdman' wins four Oscars, including best picture. Brian Truitt, USA TODAY 1:25 a.m. EST February 23, 2015. Director Alejandro G. Inarritu and the cast and crew of Birdman accept the Oscar for best picture, one of four wins for the movie at Sunday's Academy Awards in Hollywood. (Photo: John Shearer
+--- P4 (score 4.85) LONDON (AP) — The Latest on the British Academy Film Awards (all times local): 9:16 p.m. La La Land has been named best picture at the British Academy Film Awards. The top award during Sunday's ceremony was the fifth for the effervescent musical about love and ambition in Los Angeles. Emma Stone was
+--- P5 (score 4.558) More on the historic Argo Oscar win here: The 2013 Academy Award for Best Picture was awarded to Hollywood's favorite film: Argo.. Oscar looked good in Ben Affleck's hand, especially as the star was notably snubbed in the Best Directing category.
+
+YOUR CALL: 
+======================================================================
+#10 what is the score of today's cricket match
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score -0.583) 46 home matches, 3412 runs, 55.93 batting average, 199 highest score. He may unfortunately be remembered for his alleged involvement in the match-fixing scandal of the early 2000s, but Mohammad Azharuddin was also a superb batsman at home in India.n the game of cricket, batsmen always want to score 
+--- P2 (score -0.663) West Indies batsman Brian Lara has the highest individual score in Test cricket: he scored 400 not out against England in 2004 to surpass the innings of 380 by Matthew Hayden six months earlier.Lara had held the record before Hayden, with a score of 375 against England 10 years earlier.e scored the 
+--- P3 (score -0.777) Cricket is a bat and ball game, played between two teams of eleven players each. One team bats, attempting to score runs, while the other bowls and fields the ball, attempting to restrict the scoring and dismiss the batsmen. The objective of the game is for a team to score more runs than its opponen
+--- P4 (score -1.897) You are here. Uncovering Dhaka: 10 things to know. India's national cricket team continues to fight to defend its 2011 Asia Cup title in a match against Bangladesh today in Dhaka, a city that could very well be described as Asia's most discreet capital.
+--- P5 (score -1.911) He became the first and only cricketer to score 100 international centuries when he made 114 against Bangladesh in March 2012. After making his Test debut in 1989, Tendulkar's achieved his first century against England at Old Trafford, Manchester in 1990; he made 119 not out.In Test matches, Tendulk
+
+YOUR CALL: 
+======================================================================
+#11 what are the new features in the latest Android version
+STATUS: answered
+ANSWER: The newest Android release, Android Nougat, adds faster photo searching with Google Photos’ automatic, tag-free searchable library and brings Android Auto directly onto the phone’s screen[P2].
+--- P1 (score 7.098) Welcome to Android 4.2, the latest version of Jelly Bean! Android 4.2 has performance optimizations, a refreshed system UI, and great new features for users and developers. This document provides a glimpse of what's new for developers.n Android 4.2, users can place app widgets directly on their lock
+--- P2 (score 5.942) Unwrap Android Nougat The latest version of Android is here with sweet features never before seen on mobile. Find your photos faster Google Photos organizes your photos and they're automatically searchable - no tagging required. Hit the road with Android Auto Android Auto now works right on your pho
+--- P3 (score 5.291) Android™ Support. Explore more ways to enjoy your mobile life with Android operating system (OS). Each new Android OS version provides more useful features, options and ways to keep you connected and current. Android's smart, intuitive design and exclusive features have helped it become the world's 
+--- P4 (score 3.781) API Level: 19. Android 4.4 (KITKAT) is a new release for the Android platform that offers new features for users and app developers. This document provides an introduction to the most notable new APIs. As an app developer, you should download the Android 4.4 system image and SDK platform from the SD
+--- P5 (score 2.996) The new streaming app comes as Amazon has updated its main Amazon Android app to version 5.0, which adds several significant new features, including the ability to browse video content, purchase Kindle ebooks, and download apps.
+
+YOUR CALL: 
+======================================================================
+#12 how many people used ChatGPT this month
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score 1.034) As of today, one billion people are using WhatsApp. That's nearly one in seven people on Earth who use WhatsApp each month to stay in touch with their loved ones, their friends and their family. We are proud of this milestone, and we're humbled by the extraordinary ways all of you have used WhatsApp
+--- P2 (score -0.103) 158 million people are using Snapchat every day, and on average, open the app 18 times a day, according to Snap Inc.'s initial public offering prospectus. That means, on average, Snapchat users are spending between 25 to 30 minutes in the app every day. The company filed Thursday to go public, revea
+--- P3 (score -0.93) An average user calls the help desk 1.25 times per month. Given this statistic, a population of 1,000 users would generate an average of 1,250 calls per month. In a mature environment, one which is stable and hasn't had a lot of upgrades recently, this number will be lower.
+--- P4 (score -1.221) The Pew Charitable Trusts’ nationally representative telephone survey. (See “Methodology” for details on how. the survey was conducted.) Important findings from the survey are as follows: • 5 percent of adults, or about 12 million people, use prepaid cards at least once a month.
+--- P5 (score -1.68) How many people use tumblr The KGB Agent answer: Note: Tumblr's growth has been so large that any statistics we give you will have changed by the time you read this; they grow by leaps and bounds every day. Techblog recently reported that Tumblr boasts more than 120,000,000 unique users, and a stagg
+
+YOUR CALL: 
+======================================================================
+#13 will my startup succeed
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score 2.841) Microsoft's BizSpark program targets startups building software, software as a service or online services as their primary product or service offering. BizSpark provides free software, support and visibility to help startups succeed, and they power a community of over 100,000 startups in over 100 co
+--- P2 (score 2.553) To be self-funding, you have to start as a consulting company, and it's hard to switch from that to a product company. Financially, a startup is like a pass/fail course. The way to get rich from a startup is to maximize the company's chances of succeeding, not to maximize the amount of stock you ret
+--- P3 (score 2.011) Traction is the best way to improve your chances of startup success. Traction is a sign that something is working. If you charge for your. product, it means customers are buying. If your product is free, it’s a. growing userbase. Traction is powerful. Technical, market, and team risks are easier to.
+--- P4 (score 1.702) Although there is no one size, fits all theory for entrepreneurship, a few guidelines may help those with a good idea become successful entrepreneurs. The following insights can help you embark on your next entrepreneurial venture with due diligence. 1. Passion & Motivation.
+--- P5 (score 1.572) Startup accelerators and startup incubators assist entrepreneurs in the journey toward becoming successful companies, but each in their own way. However different these two processes are, many people confuse the two and use the terms interchangeably.
+
+YOUR CALL: 
+======================================================================
+#14 should I break up with my girlfriend
+STATUS: answered
+ANSWER: If you decide to end the relationship, do it face-to-face rather than by phone, text or email, since ending it in person is more respectful and less impersonal.[P5]
+--- P1 (score 6.258) Whatever, the case, if you’re feeling ignored by your girlfriend, chances are you’re also feeling hurt, frustrated, and maybe even angry. It might be tempting to ignore her back, try to make her jealous, or even break up with her, but the healthiest way to deal with being ignored is to address it di
+--- P2 (score 4.534) adjective. 1  in a way that a dick (in the jerk sense defined below) would do. 2  That was kind of a dick way to break up with your girlfriend. 3  Citation from Oh Louie / Tickets, Louie (TV), Season 2 Episode 7 (2011) blacked out to resolve Google's penalty against this site.
+--- P3 (score 4.375) How would you say, break up(with girlfriend or boyfriend) in french?)?
+--- P4 (score 4.24) When To Make First Contact With Your Ex. The week after you break up is the most critical part of any split, and also of the entire get back ex process. What you do during this time period will determine whether your girlfriend still admires and respects you, or whether she sees you as a desperate, 
+--- P5 (score 4.108) Break up in person. Although it may be easier to break up with someone if you don't have to look the person in the eye, ending a relationship by phone, text or email is impersonal and disrespectful.his can help you begin to move on and plan for a respectful and honest break up with your partner, or 
+
+YOUR CALL: 
+======================================================================
+#15 what will the weather be in Delhi on this day next year
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score 7.828) New Delhi: Weather Forecast. The warmest day over the next 7 days in New Delhi is forecast to be 24th August at 43°C (109°F) and the warmest night on 20th August at 30°C (86°F). The average temperature over the next 7 days is forecast to be 37°C (99°F) and there will be 1 day of sunshine . The avera
+--- P2 (score 5.41) Find the best month to visit New Delhi based on the weather. Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec. Expect 24°C daytime maximum temperatures in the shade with on average 8 hours of sunshine per day in New Delhi in February. Check more long-term weather averages for New Delhi in February be
+--- P3 (score 4.961) New Delhi weather text for Thu 15 th October. The weather is turning out to be sunny. The visibility is going to be around 10 km i.e. 6 miles and an atmospheric pressure of 1014 mb. The daytime temperature is going to reach 37 °c and the temperature is going to dip to 27 °c at night.n the same week 
+--- P4 (score 3.86) Best Answer: In Delhi it is still very hot and humid. This is not the right time to plan a visit in delhi. Best will be in month of october. thanks with luv. It is aweful just sultary weather no rain just hot and humid. Try this site, and change the name of the city by clicking on change the locatio
+--- P5 (score 3.8) This period is ideal for tourism in Delhi. (March to June) are scorching with temperature rises to 47C. Typically tourists avoid visting Delhi during the hot months of April to June. (July to September) are accompanied with heavy flooding rains intermittently.The gardens in Delhi are getting enliven
+
+YOUR CALL: 
+======================================================================
+#16 who is the greatest footballer of all time, in your personal opinion
+STATUS: answered
+ANSWER: Lionel Messi is widely regarded as the greatest footballer of all time. [P1][P3][P4][P5]
+--- P1 (score 6.463) There are many debates over who the greatest soccer players are of all time; but players like Zinedine Zidane, Diego Maradona, Michel Platini, Lionel Messi, and Roberto Baggio make almost every list. Click here to read the rest of this article.
+--- P2 (score 6.248) To take one example out of thousands, Cristiano Ronaldo once said: “Pele is the greatest player in football history, and there will only be one Pele.” By the time Ronaldo was born in 1985, Pele had already been retired for eight years.
+--- P3 (score 6.008) Lionel Andrés Messi Cuccittini is an Argentine professional footballer who plays as a forward for Spanish club Barcelona and the Argentina national team. Often considered the best player in the world and regarded by many as the greatest of all time, Messi has a record-tying five Ballon d'Or awards, 
+--- P4 (score 4.769) Often considered the best player in the world and rated by many in the sport as the greatest of all time, Messi is the only football player in history to win the FIFA Ballon d'Or four times, all of which he won consecutively, and the first player to win three European Golden Shoes.hile Barcelona beg
+--- P5 (score 4.616) Pronto Magazine. Lionel Messi is considered the greatest soccer player in the world. As a standout striker for La Liga giant Barcelona, the 26-year-old continues to rack up individual honors, most recently winning his fourth Ballon d'Or Award while also being tabbed the 2013 AP Soccer Player of the 
+
+YOUR CALL: 
+======================================================================
+#17 how many leaves are on the oak tree outside the Smithfield library
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score -1.875) Poison Ivy, Oak, and Sumac Leaves. Poison oak has leaves that look like oak leaves, usually with three leaflets but sometimes up to seven leaflets per leaf group.
+--- P2 (score -2.235) If a tree 50 m high has 300,000 leaves, the surface area of the leaves is 300 m2, and the amount of ground covered by the tree's canopy is 75 m2.
+--- P3 (score -2.755) Poison Ivy, Oak, and Sumac Leaves. Poison oak has leaves that look like oak leaves, usually with three leaflets but sometimes up to seven leaflets per leaf group. It grows as a vine or a shrub.
+--- P4 (score -3.127) Oak > Leaves > Leaf edges brown, center of leaf green. 1 of 7. 1  Leaves wilt, leaf edges and tips turn brown, with a green center. 2  In red oak group symptoms are first seen in the top of the canopy, disease progresses to the entire canopy and kills tree in 1 to 3 months.  Infected trees drop thei
+--- P5 (score -3.487) Red Oak are fast growing and high quality trees that are easy to maintain and require moderate amounts of fertilizer and moisture when established. Red Oak leaves are 4 to 8 inchs long, display 5 to 7 deep lobes and have bristles on the tips of each lobe. The leaves are glossy dark green with a ligh
+
+YOUR CALL: 
+======================================================================
+#18 what was the third song played at the 2004 prom of Lincoln High in Kansas
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score -5.162) Glory Of Love by Peter Cetera Songfacts. This ballad was Peter Cetera's first solo single after leaving Chicago the previous year. It was the theme song for the film The Karate Kid: Part II. It fit the movie perfectly, and was the most popular song at weddings and proms across the country that year.
+--- P2 (score -5.64) Format: Audio CD|Verified Purchase. 1  I'll admit right up front that I bought this CD for one song, and for one song only, Come and Get Your Love.. This is a deeply treasured classic from my central Kansas sixth-grade days at the local lunch counter, playing nickel pinball and listening to the juke
+--- P3 (score -6.676) Kurt (Chris Colfer) and Mercedes (Amber Riley) dance at the prom. Tina (Jenna Ushkowitz), Santana (Naya Rivera) and Brittany (Heather Morris) perform at the prom. Finn wishes Rachel luck on her performance. Rachel prepares for her college audition.
+--- P4 (score -6.758) The second and third singles from the album, Heavy Liftin' and Playboys of the Southwestern World, each cracked the top 50, and The Dreamer went gold. In 2004, Blake Shelton began releasing a string of hit albums, beginning with Blake Shelton’s Barn & Grill. The second single from the album, Some Be
+--- P5 (score -6.797) The Three Degrees performed the song at Prince Charles ' 30th birthday party at Buckingham Palace in 1978. Sheila Ferguson recalled that the song was played to me by Kenny Gamble at the piano in 1973 and I threw a tantrum. I screamed and yelled and said I would never sing it.
+
+YOUR CALL: 
+======================================================================
+#19 what was the exact temperature in Reykjavik at 3:47 pm on 9 March 2011
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score 1.594) Reykjavik: Annual Weather Averages. July is the hottest month in Reykjavik with an average temperature of 11°C (52°F) and the coldest is January at 0°C (32°F) with the most daily sunshine hours at 12 in March.The wettest month is January with an average of 50mm of rain.eykjavik: Annual Weather Avera
+--- P2 (score 0.661) The highest recorded temperature in January, 13.6°C (56.5°F), was at Skjaldþingsstaðir, East Iceland, on January 5, and the lowest, -26.0°C (-14.8°F), at Setur in the central highlands on January 11. The precipitation in Reykjavík was 127.3 mm, which is nearly 70 percent above the average for Januar
+--- P3 (score 0.209) Although you can expect warmth and sun, you can also expect cloud, wind and rain. In July, the temperature in Reykjavík averages at just under 12° Celsius, but has been recorded as high as 25.7° and as low as 3.5° since the turn of the millennium.
+--- P4 (score -0.47) The lowest temperature was -38°C (- 36.4°F) in 1918 at Grimsstaðir grímsstaðir in the northeast Of. Iceland temperature records For reykjavik are.24°8 (c.76°6) f on 11 august, 2004 -and.24°5 (-c.12°1) f on 21 january. 1918 you can also check the current local weather conditions In. iceland
+--- P5 (score -0.526) Check the Weather in Iceland in March before you book your next holiday. This gives the best indication of the weather in March and includes figures for temperature, sunshine and rainfall. The Iceland march weather guide shown below is for Reykjavik. 1  2°C max day temperature.
+
+YOUR CALL: 
+======================================================================
+#20 how many keystrokes did a typist in Omaha make on 5 June 1998
+STATUS: refused_by_model
+ANSWER: I can't answer this from the available documents.
+--- P1 (score -6.98) The fastest typing speed on an alphanumeric keyboard, 216 words in one minute, was achieved by Stella Pajunas in 1946 on an IBM electric. As of 2005, writer Barbara Blackburn was the fastest alphanumerical English language typist in the world, according to The Guinness Book of World Records.
+--- P2 (score -7.148) Below are a few facts about typing and hopefully, a few hints as to why it is so important. The fastest typist in the world was a woman named Barbara Blackburn. In 2005, using a Simplified Dvorak keyboard, she was able to sustain 150 words per minute for 50 minute, and 170 words per minute for short
+--- P3 (score -7.711) The highest typing speed ever recorded was 216 words per minute (wpm), set by Stella Pajunas in 1946, using an IBM electric typewriter. Currently, the fastest English language typist is Barbara Blackburn, who reached a peak typing speed of 212 wpm during a test in 2005, using a Dvorak simplified key
+--- P4 (score -7.837) average data entry keystrokes per hour salaries the average salary for data entry keystrokes per hour jobs is $ 20000
+--- P5 (score -7.883) Data entry clerks and typists use keyboard skills to enter information into databases and systems, and create letters, reports and other documents. Salary: £12,000 to £25,000 average per year. Hours: 35 to 40 per week.
+
+YOUR CALL: 

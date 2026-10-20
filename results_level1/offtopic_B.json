@@ -1,0 +1,817 @@
+[
+ {
+  "query": "what is the capital of the country of Vorlundia",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "7424810",
+    "score": -0.841,
+    "text": "Podgorica is the capital of Montenegro. Covering a total area of 55.6 square miles, Podgorica is the largest city in the country.As estimated in 2011, the capital had a population of 151,312. It is the administrative, economic, cultural and educational center of Montenegro.odgorica is the capital of Montenegro. Covering a total area of 55.6 square miles, Podgorica is the largest city in the country."
+   },
+   {
+    "label": "P2",
+    "pid": "4836880",
+    "score": -1.025,
+    "text": "Skopje[Note 1] is the capital and largest city of the Republic of Macedonia. It is the country's political, cultural, economic, and academic center. It was known in the Roman period under the name Scupi. The territory of Skopje has been inhabited since at least 4000 BC; remains of Neolithic settlements have been found within the old Kale Fortress that overlooks the modern city centre. Scupi became the capital of Dardania in the second century BC. On the eve of the 1st century AD, the settlement"
+   },
+   {
+    "label": "P3",
+    "pid": "5932567",
+    "score": -2.39,
+    "text": "Brasilia is the capital of Brazil. In 1956, Juscelino Kubitschek de Olveira [September 12, 1902-August 22, 1976], who was President of Brazil, 1956-1961, ordered the building of Brasilia to fulfill an article in Brazil's constiution."
+   },
+   {
+    "label": "P4",
+    "pid": "2645779",
+    "score": -2.677,
+    "text": "Brasilia is the capital city of Brazil. The recognition became official on April 21, 1960. In 1956 Juscelino Kubitschek de Olveira [September 12, 1902-August 22, 1976], who wa \u2026 s President of Brazil, 1956-1961], ordered the building of Brasilia to fulfill an article in Brazil's constitution."
+   },
+   {
+    "label": "P5",
+    "pid": "5445711",
+    "score": -2.802,
+    "text": "Amsterdam is the capital of the Netherlands. With more than one million inhabitants in its urban area, it is the country's largest city and its financial, cultural, and creative centre. Amsterdam derives its name from the city\u2019s origin as \u201cDam\u201d of river \u201cAmstel\u201d.msterdam is the capital of the Netherlands. With more than one million inhabitants in its urban area, it is the country's largest city and its financial, cultural, and creative centre. Amsterdam derives its name from the city\u2019s origin as \u201cDam\u201d of river \u201cAmstel\u201d."
+   }
+  ],
+  "retrieval_ms": 4828.1,
+  "generation_ms": 1138.8
+ },
+ {
+  "query": "who founded the Ashgrove Institute of Aerodynamic Poetry",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "44083",
+    "score": -3.069,
+    "text": "Harriet Monroe, a fellow resident of Chicago, had founded the magazine Poetry in 1912. Monroe liked and encouraged Sandburg's plain-speaking free verse style, strongly reminiscent of Walt Whitman. Chicago Poems established Sandburg as a major figure in contemporary literature."
+   },
+   {
+    "label": "P2",
+    "pid": "2609375",
+    "score": -3.092,
+    "text": "Langley Field was named after Samuel Pierpoint Langley, an aerodynamic pioneer and a former Secretary of the Smithsonian Institution. Langley began aerodynamic experiments in 1887 and formed a basis for practical pioneer aviation."
+   },
+   {
+    "label": "P3",
+    "pid": "3032418",
+    "score": -3.812,
+    "text": "Share on Facebook Tweet Share Pin Share. Jack Whiteside Parsons was an unusual man. He co-founded both the Jet Propulsion Laboratory and the Aerojet Engineering Corporation, created pyrotechnics for the film industry, wrote a book of poems, and masturbated onto magical tablets in an attempt to conjure a lover."
+   },
+   {
+    "label": "P4",
+    "pid": "8626743",
+    "score": -3.887,
+    "text": "Birstall is the birthplace of Joseph Priestley, the discoverer of oxygen. Priestley was tutored extensively by the then Vicar of Birstall, an Edinburgh man with a keen interest in science. He was also a pupil at Batley Grammar School for Boys, founded in 1612 by the Rev. William Lee."
+   },
+   {
+    "label": "P5",
+    "pid": "6304961",
+    "score": -5.188,
+    "text": "In the 1970s, Bernstein co-founded the influential journal L=A=N=G=U=A=G=E. He has also written the librettos for a number of operas with composers such as Ben Yarmolinsky, Brian Ferneyhough, and Dean Drummond. Bernstein serves as the Executive Editor, and co-founder, of The Electronic Poetry Center at SUNY-Buffalo.is honors and awards include the Roy Harvey Pearce/Archive for New Poetry Prize and fellowships from the New York Foundation for the Arts, the Guggenheim Foundation, and the National Endowment for the Arts."
+   }
+  ],
+  "retrieval_ms": 370.5,
+  "generation_ms": 606.9
+ },
+ {
+  "query": "what are the side effects of norvenatil",
+  "answer": "Norvasc can cause dizziness, drowsiness, nausea, stomach pain or cramps, headache, muscle cramps, weakness, tiredness or low energy, and flushing or a feeling of warmth, with occasional severe effects such as heart pounding, severe stomach cramps, or severe dizziness[P1][P2][P3]",
+  "status": "answered",
+  "cited": [
+   1,
+   2,
+   3
+  ],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "6679103",
+    "score": 6.955,
+    "text": "Infrequent side effects of Norvasc: 1  DizzyLess Severe. 2  DrowsinessLess Severe. 3  Feel Like Throwing UpLess Severe.  Heart Throbbing or PoundingLess 1  Severe. Low EnergyLess Severe.  Stomach CrampsLess 1  Severe. Temporary Redness of Face and NeckLess Severe."
+   },
+   {
+    "label": "P2",
+    "pid": "1309443",
+    "score": 6.814,
+    "text": "Norvasc is used to treat hypertension (high blood pressure) and angina (chest pain), either alone or in combination with other medications. Common side effects of Norvasc include dizziness, drowsiness, tiredness, headache, muscle cramps, weakness, nausea, and stomach pain."
+   },
+   {
+    "label": "P3",
+    "pid": "3315433",
+    "score": 6.674,
+    "text": "A: Norvasc (amlodipine) is a medication used to treat high blood pressure. Studies show that some of the common side effects are dizziness, headache, and rarely fainting as a result of low blood pressure.Some studies suggest that taking at bedtime can alleviate fainting.he most common side effect of Norvasc is edema, or swelling of the hands, feet, ankles, or lower legs. You are more likely to experience edema with higher doses of Norvasc. Other common side effects of Norvascinclude: 1  Headache. 2  Abdominal pain. 3  Nausea. 4  Dizziness. 5  Drowsiness and fatigue. 6  Flushing (feeling of warmth)."
+   },
+   {
+    "label": "P4",
+    "pid": "1814129",
+    "score": 3.199,
+    "text": "They may also have an effect on other neurotransmitters. Serotonin-Norepinephrine Reuptake inhibitors (SNRIs) include desvenlafaxine (Pristiq), duloxetine (Cymbalta), venlafaxine (Effexor), venlafaxine XR (Effexor XR), milnacipran (Savella), and levomilnacipran (Fetzima). Side effects most common to the class of SNRIs include nausea, dizziness, and sweating. SNRIs, particularly duloxetine, venlafaxine, and desvenlafaxine may cause sexual dysfunction. Other side effects include tiredness, constipation, insomnia, anxiety, headache, and loss of appetite."
+   },
+   {
+    "label": "P5",
+    "pid": "952252",
+    "score": 2.053,
+    "text": "It may also be used to treat other conditions including nerve pain, eating disorder, anxiety, and panic disorder. It is available in generic form. The most common side effects of Elavil are drowsiness, dry mouth, dizziness, blurred vision, constipation, weight gain, or trouble urinating."
+   }
+  ],
+  "retrieval_ms": 342.2,
+  "generation_ms": 554.8
+ },
+ {
+  "query": "how many students attend Pemberton-Hale Academy in Nevada",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "7755841",
+    "score": -0.371,
+    "text": "Colleges/universities with over 2000 students nearest to Fallon: 1  Truckee Meadows Community College (about 55 miles; Reno, NV; Full-time enrollment: 6,919). 2  University of Nevada-Reno (about 56 miles; Reno, NV; FT enrollment: 15,092). 3  Western Nevada College (about 58 miles; Carson City, NV; FT enrollment: 2,338)."
+   },
+   {
+    "label": "P2",
+    "pid": "4397179",
+    "score": -2.567,
+    "text": "As demonstrated on the 2011 Nevada Writing Proficiency Exam, 65% of the. eighth grade students will demonstrate proficiency. Principal's Highlights. At Lois & Jerry Tarkanian Middle School we empower all students to achieve."
+   },
+   {
+    "label": "P3",
+    "pid": "4862386",
+    "score": -3.57,
+    "text": "For those living in the Las Vegas, Nevada area, there are many career and education opportunities for fitness instructors. There are currently 1,620 jobs for fitness instructors in Nevada and this is projected to grow by 32% to about 2,130 jobs by 2016."
+   },
+   {
+    "label": "P4",
+    "pid": "1452998",
+    "score": -3.748,
+    "text": "The amount of students that attend Northwestern University (NU) in Evanston, Illinois, is approximately 19,000. About 8,000 of these students are full-time undergraduates, and\u2026 8,000 are full-time graduate students."
+   },
+   {
+    "label": "P5",
+    "pid": "3943744",
+    "score": -3.839,
+    "text": "Approximately 12,800 students attend Duke University. 6,200 undergraduates and around 6,800 post graduate students study at Duke."
+   }
+  ],
+  "retrieval_ms": 446.9,
+  "generation_ms": 376.0
+ },
+ {
+  "query": "what is the balance in my savings account",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "4861521",
+    "score": 4.527,
+    "text": "Average retirement savings by age. This chart shows average retirement plan account balances by age as of 2014. For people under age 25, the average account balance was $3,865. For people age 25 to age 34, the average account balance was $21,524. For people age 35 to age 44, the average account balance was $54,054."
+   },
+   {
+    "label": "P2",
+    "pid": "4632059",
+    "score": 3.926,
+    "text": "According to the SBI bank instructions, the minimum balance required for savings account holders is Rs. 5,000 in metropolitan areas. Similarly, in the urban areas, the customers need to maintain the average monthly balance should be Rs. 3,000."
+   },
+   {
+    "label": "P3",
+    "pid": "2540100",
+    "score": 3.173,
+    "text": "The best way to increase the balance in your savings account is to make it a priority to put money there. That means you need to stop thinking about savings as something you do at the end of the month after the bills are paid, and instead think of your savings account as one of the first bills to be paid. Make a point to deposit money into your savings account every pay period."
+   },
+   {
+    "label": "P4",
+    "pid": "2786441",
+    "score": 2.258,
+    "text": "Your account's available balance is the most current record the bank has about the amount of money available for your next purchase or for you to withdraw. It can change throughout the day, as money moves in and out of your account, because it also includes your pending transactions."
+   },
+   {
+    "label": "P5",
+    "pid": "1050263",
+    "score": 1.857,
+    "text": "Get access to your direct deposit up to 3 days earlier than other banks/prepaid card options. To keep the Insight Savings account open, you need to maintain the minimum balance of just $10. While there is a max balance of $5000, the balance may exceed this amount once the interest posts to the account."
+   }
+  ],
+  "retrieval_ms": 312.3,
+  "generation_ms": 490.4
+ },
+ {
+  "query": "what is the email address of the CEO's assistant at my company",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "7338837",
+    "score": 0.456,
+    "text": "Job Posting: Executive Assistant to the President and CEO. Job Description: Reporting directly to the President and CEO, the Executive Assistant provides. executive support in a one-on-one working relationship. The Executive Assistant serves as the primary. point of contact for internal and external constituencies on all matters pertaining to the Office of the. President."
+   },
+   {
+    "label": "P2",
+    "pid": "1003955",
+    "score": -3.618,
+    "text": "1 Fax Number: All fax communication with the corporate office should be sent to 1-215-981-7790. 2  Email: Though there is no dedicated email address for Comcast headquarters, there is a feedback form suggested by the Senior Vice President of Customer Experience [+] ."
+   },
+   {
+    "label": "P3",
+    "pid": "3958784",
+    "score": -3.798,
+    "text": "Whether you want to share an experience you've had with our Company or have a question you want answered, we'd like to hear from you! If you prefer to leave an anonymous and confidential message for senior management or the board of directors, call 855-900-0046."
+   },
+   {
+    "label": "P4",
+    "pid": "8659887",
+    "score": -3.876,
+    "text": "Stay in touch with us by phone, email, or visiting our locations by looking at our contact info here. Search for: 800.924.0569 (Toll-Free) | 505.877.6967 (Shelter) | 505.217.9586 (Corporate Office)"
+   },
+   {
+    "label": "P5",
+    "pid": "3456211",
+    "score": -3.982,
+    "text": "Phone Number: The phone number for Google headquarters is 1-650-253-0000. Fax Number: Faxes can be sent to 1-650-253-0001. Email: Contacting Google headquarters or the executive team by email may not be an option, but each of the executives on the Google team has a Google Plus account."
+   }
+  ],
+  "retrieval_ms": 414.0,
+  "generation_ms": 561.4
+ },
+ {
+  "query": "where does my coworker Anita live",
+  "answer": "Your coworker Anita lives northwest of the Grand Tree, just west of the swamp, where her house is located. [P1]",
+  "status": "answered",
+  "cited": [
+   1
+  ],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "3781236",
+    "score": -1.176,
+    "text": "Glough's girlfriend can be found northwest of the Grand Tree, just west of the swamp. Go up the most north-western set of stairs to enter Anita's house. Talk to her and she'll give you the key to Glough's chest. Now head over to Glough's house and find the chest at the east end of the house."
+   },
+   {
+    "label": "P2",
+    "pid": "5894338",
+    "score": -3.539,
+    "text": "I first heard about LaCroix from a coworker who grew up outside of Chicago. She waxed poetic about her parents sitting down to sip cold Pamplemousse-flavored sparkling water at the end of the day, which sounded so intriguingly chic, another coworker bought a 12-pack of cans so we could try it ourselves. I tried one and wondered if I was missing something."
+   },
+   {
+    "label": "P3",
+    "pid": "1119928",
+    "score": -3.909,
+    "text": "Gender: Female. Usage: Anita, of Hebrew origin, is a very popular first name. It is more often used as a girl (female) name. People having the name Anita are in general originating from Belgium, Finland, France, Germany, Hungary, Ireland, Italy, Luxembourg, Netherlands, Poland, Spain, United Kingdom, United States of America."
+   },
+   {
+    "label": "P4",
+    "pid": "1330563",
+    "score": -4.26,
+    "text": "Anita Lopez, Lucas County Auditor. \u200bAnita Lopez, Esq. is a licensed State of Ohio attorney and a graduate of the University of Toledo. She is the 7th child of migrant workers who taught her the value of hard work, to be loyal to God and our great country, the USA."
+   },
+   {
+    "label": "P5",
+    "pid": "8102131",
+    "score": -5.472,
+    "text": "My coworker from Poland told me about plackis, which are essentially the same thing as latkes without the Chanukah story. I Ate Potato Pancakes Til I Plotzed Emily Shire December 16, 2014. Eric Hughes was having a smoke break and talking to a coworker."
+   }
+  ],
+  "retrieval_ms": 406.0,
+  "generation_ms": 533.3
+ },
+ {
+  "query": "what did my mother say to me this morning",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "4535548",
+    "score": 0.983,
+    "text": "I would always ask my mom 'What's for dinner?' and the response would be 'I don't know.' I said I was going to make up a dish called 'I don't know' dish. would always ask my mom 'What's for dinner?' and the response would be 'I don't know.' I said I was going to make up a dish called 'I don't know' dish."
+   },
+   {
+    "label": "P2",
+    "pid": "8792706",
+    "score": -1.074,
+    "text": "My mom is a very proper lady. I have never heard a cuss word or a dirty joke pass her lips. She was hilarious after her back surgery. She was asleep so I started to read my book. I glanced over at her and was disconcerted to see her staring at me unblinking. She said, Look they even brought the dog.."
+   },
+   {
+    "label": "P3",
+    "pid": "1236679",
+    "score": -1.124,
+    "text": "By writing too much you are more likely to end up saying things that are either not appropriate or necessary for the situation. In case you are still at a loss over what to say, her are a few sample sympathy messages for loss of mother: \u201cThe memory of your mother will live on in our hearts forever.\u201d. \u201cPlease accept my heartfelt sympathy on the passing of your mother.\u201d. \u201cI am sorry to hear about the loss of your mother."
+   },
+   {
+    "label": "P4",
+    "pid": "419731",
+    "score": -1.24,
+    "text": "But then there was constraint in the correspondence\u2014it was submitted to her mother. Night and Morning, Complete Edward Bulwer-Lytton But, placid as she was, my mother was authoritative, and could not endure any kind of constraint."
+   },
+   {
+    "label": "P5",
+    "pid": "2053167",
+    "score": -1.761,
+    "text": "My mother had me write a check for her and take it to her bank and cash it. I did so and gave the money to her. I have my husband as a witness. I do not live close to her and was only home on a \u2026"
+   }
+  ],
+  "retrieval_ms": 471.1,
+  "generation_ms": 487.4
+ },
+ {
+  "query": "which film won best picture at the 2025 Academy Awards",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "407949",
+    "score": 6.647,
+    "text": "The Oscar nominees for best cinematography in a motion picture have been announced by the film academy. They include: They are: Roger Deakins, Blade Runner 2024; Bruno Delbonnel, Darkest Hour; Hoyte van Hoytema, Dunkirk; Rachel Morrison, Mudbound; Dan Laustsen, The Shape of Water.-----5 a.m. The Oscar nominations are about to begin."
+   },
+   {
+    "label": "P2",
+    "pid": "6978798",
+    "score": 5.934,
+    "text": "Shakespeare in Love far behind in second place. The American public overwhelmingly would like to see Steven Spielberg's Saving Private Ryan win the Oscar this Sunday night as the best picture of the year in the annual Academy Awards ceremonies."
+   },
+   {
+    "label": "P3",
+    "pid": "1169715",
+    "score": 5.231,
+    "text": "'Birdman' wins four Oscars, including best picture. Brian Truitt, USA TODAY 1:25 a.m. EST February 23, 2015. Director Alejandro G. Inarritu and the cast and crew of Birdman accept the Oscar for best picture, one of four wins for the movie at Sunday's Academy Awards in Hollywood. (Photo: John Shearer/Invision/AP)."
+   },
+   {
+    "label": "P4",
+    "pid": "4705831",
+    "score": 4.85,
+    "text": "LONDON (AP) \u2014 The Latest on the British Academy Film Awards (all times local): 9:16 p.m. La La Land has been named best picture at the British Academy Film Awards. The top award during Sunday's ceremony was the fifth for the effervescent musical about love and ambition in Los Angeles. Emma Stone was named best actress for her performance in La La Land.."
+   },
+   {
+    "label": "P5",
+    "pid": "2714260",
+    "score": 4.558,
+    "text": "More on the historic Argo Oscar win here: The 2013 Academy Award for Best Picture was awarded to Hollywood's favorite film: Argo.. Oscar looked good in Ben Affleck's hand, especially as the star was notably snubbed in the Best Directing category."
+   }
+  ],
+  "retrieval_ms": 303.4,
+  "generation_ms": 621.9
+ },
+ {
+  "query": "what is the score of today's cricket match",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "6597518",
+    "score": -0.583,
+    "text": "46 home matches, 3412 runs, 55.93 batting average, 199 highest score. He may unfortunately be remembered for his alleged involvement in the match-fixing scandal of the early 2000s, but Mohammad Azharuddin was also a superb batsman at home in India.n the game of cricket, batsmen always want to score runs on their home turf, especially when representing their country in Test cricket. The bowlers come into a tour fired up and determined to make their mark on unfamiliar territory, so to repel them, a batsman needs to have a great amount of talent at the crease."
+   },
+   {
+    "label": "P2",
+    "pid": "6597514",
+    "score": -0.663,
+    "text": "West Indies batsman Brian Lara has the highest individual score in Test cricket: he scored 400 not out against England in 2004 to surpass the innings of 380 by Matthew Hayden six months earlier.Lara had held the record before Hayden, with a score of 375 against England 10 years earlier.e scored the most runs in a series, has the most double centuries and was a part of the record 5th and 6th wicket partnerships. His most significant record is his batting average of 99.94. One of cricket's most famous statistics, it stands almost 40 runs higher than any other batsman's average."
+   },
+   {
+    "label": "P3",
+    "pid": "5022394",
+    "score": -0.777,
+    "text": "Cricket is a bat and ball game, played between two teams of eleven players each. One team bats, attempting to score runs, while the other bowls and fields the ball, attempting to restrict the scoring and dismiss the batsmen. The objective of the game is for a team to score more runs than its opponent."
+   },
+   {
+    "label": "P4",
+    "pid": "8312420",
+    "score": -1.897,
+    "text": "You are here. Uncovering Dhaka: 10 things to know. India's national cricket team continues to fight to defend its 2011 Asia Cup title in a match against Bangladesh today in Dhaka, a city that could very well be described as Asia's most discreet capital."
+   },
+   {
+    "label": "P5",
+    "pid": "7890424",
+    "score": -1.911,
+    "text": "He became the first and only cricketer to score 100 international centuries when he made 114 against Bangladesh in March 2012. After making his Test debut in 1989, Tendulkar's achieved his first century against England at Old Trafford, Manchester in 1990; he made 119 not out.In Test matches, Tendulkar has scored centuries against all the Test cricket playing nations, and is the second batsman to score 150 against each of them.endulkar has scored centuries (100 or more runs) in Test matches and One Day International (ODI) matches, organised by the International Cricket Council."
+   }
+  ],
+  "retrieval_ms": 381.8,
+  "generation_ms": 572.0
+ },
+ {
+  "query": "what are the new features in the latest Android version",
+  "answer": "The newest Android release, Android Nougat, adds faster photo searching with Google Photos\u2019 automatic, tag-free searchable library and brings Android Auto directly onto the phone\u2019s screen[P2].",
+  "status": "answered",
+  "cited": [
+   2
+  ],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "4579293",
+    "score": 7.098,
+    "text": "Welcome to Android 4.2, the latest version of Jelly Bean! Android 4.2 has performance optimizations, a refreshed system UI, and great new features for users and developers. This document provides a glimpse of what's new for developers.n Android 4.2, users can place app widgets directly on their lock screens, for instant access to favorite app content without having to unlock. Users can add as many as five lock screen widgets, choosing from widgets provided by installed apps."
+   },
+   {
+    "label": "P2",
+    "pid": "2189896",
+    "score": 5.942,
+    "text": "Unwrap Android Nougat The latest version of Android is here with sweet features never before seen on mobile. Find your photos faster Google Photos organizes your photos and they're automatically searchable - no tagging required. Hit the road with Android Auto Android Auto now works right on your phone screen."
+   },
+   {
+    "label": "P3",
+    "pid": "931368",
+    "score": 5.291,
+    "text": "Android\u2122 Support. Explore more ways to enjoy your mobile life with Android operating system (OS). Each new Android OS version provides more useful features, options and ways to keep you connected and current. Android's smart, intuitive design and exclusive features have helped it become the world's most popular mobile platform."
+   },
+   {
+    "label": "P4",
+    "pid": "245806",
+    "score": 3.781,
+    "text": "API Level: 19. Android 4.4 (KITKAT) is a new release for the Android platform that offers new features for users and app developers. This document provides an introduction to the most notable new APIs. As an app developer, you should download the Android 4.4 system image and SDK platform from the SDK Manager as soon as possible."
+   },
+   {
+    "label": "P5",
+    "pid": "5104068",
+    "score": 2.996,
+    "text": "The new streaming app comes as Amazon has updated its main Amazon Android app to version 5.0, which adds several significant new features, including the ability to browse video content, purchase Kindle ebooks, and download apps."
+   }
+  ],
+  "retrieval_ms": 428.0,
+  "generation_ms": 698.2
+ },
+ {
+  "query": "how many people used ChatGPT this month",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "1701491",
+    "score": 1.034,
+    "text": "As of today, one billion people are using WhatsApp. That's nearly one in seven people on Earth who use WhatsApp each month to stay in touch with their loved ones, their friends and their family. We are proud of this milestone, and we're humbled by the extraordinary ways all of you have used WhatsApp."
+   },
+   {
+    "label": "P2",
+    "pid": "6097146",
+    "score": -0.103,
+    "text": "158 million people are using Snapchat every day, and on average, open the app 18 times a day, according to Snap Inc.'s initial public offering prospectus. That means, on average, Snapchat users are spending between 25 to 30 minutes in the app every day. The company filed Thursday to go public, revealing for the first time how many people use the disappearing photo app. The company says 2.8 billion Snaps are created every day, and 60% of its daily users are using Snapchat to also chat with their friends."
+   },
+   {
+    "label": "P3",
+    "pid": "4496070",
+    "score": -0.93,
+    "text": "An average user calls the help desk 1.25 times per month. Given this statistic, a population of 1,000 users would generate an average of 1,250 calls per month. In a mature environment, one which is stable and hasn't had a lot of upgrades recently, this number will be lower."
+   },
+   {
+    "label": "P4",
+    "pid": "3818042",
+    "score": -1.221,
+    "text": "The Pew Charitable Trusts\u2019 nationally representative telephone survey. (See \u201cMethodology\u201d for details on how. the survey was conducted.) Important findings from the survey are as follows: \u2022 5 percent of adults, or about 12 million people, use prepaid cards at least once a month."
+   },
+   {
+    "label": "P5",
+    "pid": "5512486",
+    "score": -1.68,
+    "text": "How many people use tumblr The KGB Agent answer: Note: Tumblr's growth has been so large that any statistics we give you will have changed by the time you read this; they grow by leaps and bounds every day. Techblog recently reported that Tumblr boasts more than 120,000,000 unique users, and a staggering 15,000,000,000 page views per month."
+   }
+  ],
+  "retrieval_ms": 451.1,
+  "generation_ms": 522.9
+ },
+ {
+  "query": "will my startup succeed",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "1959689",
+    "score": 2.841,
+    "text": "Microsoft's BizSpark program targets startups building software, software as a service or online services as their primary product or service offering. BizSpark provides free software, support and visibility to help startups succeed, and they power a community of over 100,000 startups in over 100 countries. They also aggregate special offers for startups from a network of third party partners."
+   },
+   {
+    "label": "P2",
+    "pid": "3858282",
+    "score": 2.553,
+    "text": "To be self-funding, you have to start as a consulting company, and it's hard to switch from that to a product company. Financially, a startup is like a pass/fail course. The way to get rich from a startup is to maximize the company's chances of succeeding, not to maximize the amount of stock you retain."
+   },
+   {
+    "label": "P3",
+    "pid": "5378332",
+    "score": 2.011,
+    "text": "Traction is the best way to improve your chances of startup success. Traction is a sign that something is working. If you charge for your. product, it means customers are buying. If your product is free, it\u2019s a. growing userbase. Traction is powerful. Technical, market, and team risks are easier to. address with traction. Fundraising, hiring, press, partnerships and ac -. quisitions are all easier with traction. In other words, traction trumps everything. This book is for startups of all kinds: consumer or enterprise-focused, from ecommerce to apps and everything in between."
+   },
+   {
+    "label": "P4",
+    "pid": "2528285",
+    "score": 1.702,
+    "text": "Although there is no one size, fits all theory for entrepreneurship, a few guidelines may help those with a good idea become successful entrepreneurs. The following insights can help you embark on your next entrepreneurial venture with due diligence. 1. Passion & Motivation."
+   },
+   {
+    "label": "P5",
+    "pid": "6797014",
+    "score": 1.572,
+    "text": "Startup accelerators and startup incubators assist entrepreneurs in the journey toward becoming successful companies, but each in their own way. However different these two processes are, many people confuse the two and use the terms interchangeably."
+   }
+  ],
+  "retrieval_ms": 310.3,
+  "generation_ms": 441.5
+ },
+ {
+  "query": "should I break up with my girlfriend",
+  "answer": "If you decide to end the relationship, do it face-to-face rather than by phone, text or email, since ending it in person is more respectful and less impersonal.[P5]",
+  "status": "answered",
+  "cited": [
+   5
+  ],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "4475627",
+    "score": 6.258,
+    "text": "Whatever, the case, if you\u2019re feeling ignored by your girlfriend, chances are you\u2019re also feeling hurt, frustrated, and maybe even angry. It might be tempting to ignore her back, try to make her jealous, or even break up with her, but the healthiest way to deal with being ignored is to address it directly.. Set a date to speak in person. If your girlfriend is completely ignoring you, you might not be able to get in touch with her via phone or in person. If you know she is still getting your texts, you might try sending her a message that expresses your concern and asks her to meet up and talk."
+   },
+   {
+    "label": "P2",
+    "pid": "2919759",
+    "score": 4.534,
+    "text": "adjective. 1  in a way that a dick (in the jerk sense defined below) would do. 2  That was kind of a dick way to break up with your girlfriend. 3  Citation from Oh Louie / Tickets, Louie (TV), Season 2 Episode 7 (2011) blacked out to resolve Google's penalty against this site."
+   },
+   {
+    "label": "P3",
+    "pid": "7873030",
+    "score": 4.375,
+    "text": "How would you say, break up(with girlfriend or boyfriend) in french?)?"
+   },
+   {
+    "label": "P4",
+    "pid": "2847427",
+    "score": 4.24,
+    "text": "When To Make First Contact With Your Ex. The week after you break up is the most critical part of any split, and also of the entire get back ex process. What you do during this time period will determine whether your girlfriend still admires and respects you, or whether she sees you as a desperate, needy mess.hen To Make First Contact With Your Ex. The week after you break up is the most critical part of any split, and also of the entire get back ex process. What you do during this time period will determine whether your girlfriend still admires and respects you, or whether she sees you as a desperate, needy mess."
+   },
+   {
+    "label": "P5",
+    "pid": "4740148",
+    "score": 4.108,
+    "text": "Break up in person. Although it may be easier to break up with someone if you don't have to look the person in the eye, ending a relationship by phone, text or email is impersonal and disrespectful.his can help you begin to move on and plan for a respectful and honest break up with your partner, or focus on healing your relationship further. 1  Remember that your decision is based on what is best for you\u2014an no else."
+   }
+  ],
+  "retrieval_ms": 340.1,
+  "generation_ms": 1119.2
+ },
+ {
+  "query": "what will the weather be in Delhi on this day next year",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "63641",
+    "score": 7.828,
+    "text": "New Delhi: Weather Forecast. The warmest day over the next 7 days in New Delhi is forecast to be 24th August at 43\u00b0C (109\u00b0F) and the warmest night on 20th August at 30\u00b0C (86\u00b0F). The average temperature over the next 7 days is forecast to be 37\u00b0C (99\u00b0F) and there will be 1 day of sunshine . The average for August is 30\u00b0C (86\u00b0F) in New Delhi."
+   },
+   {
+    "label": "P2",
+    "pid": "8033513",
+    "score": 5.41,
+    "text": "Find the best month to visit New Delhi based on the weather. Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec. Expect 24\u00b0C daytime maximum temperatures in the shade with on average 8 hours of sunshine per day in New Delhi in February. Check more long-term weather averages for New Delhi in February before you book your next holiday to India in 2018."
+   },
+   {
+    "label": "P3",
+    "pid": "509498",
+    "score": 4.961,
+    "text": "New Delhi weather text for Thu 15 th October. The weather is turning out to be sunny. The visibility is going to be around 10 km i.e. 6 miles and an atmospheric pressure of 1014 mb. The daytime temperature is going to reach 37 \u00b0c and the temperature is going to dip to 27 \u00b0c at night.n the same week the minimum temperature will be 26\u2103 (or 80\u2109) on Friday 16 th October at around 5 am. Our New Delhi weather forecaster is reporting little or no rainfall over the next 7 days."
+   },
+   {
+    "label": "P4",
+    "pid": "1185782",
+    "score": 3.86,
+    "text": "Best Answer: In Delhi it is still very hot and humid. This is not the right time to plan a visit in delhi. Best will be in month of october. thanks with luv. It is aweful just sultary weather no rain just hot and humid. Try this site, and change the name of the city by clicking on change the location."
+   },
+   {
+    "label": "P5",
+    "pid": "1855943",
+    "score": 3.8,
+    "text": "This period is ideal for tourism in Delhi. (March to June) are scorching with temperature rises to 47C. Typically tourists avoid visting Delhi during the hot months of April to June. (July to September) are accompanied with heavy flooding rains intermittently.The gardens in Delhi are getting enlivened up during the monsoons.t is the best time to enjoy the warm winter sun and go sightseeing. Other than being the capital, there are several monuments that will attract you to this city. Although, few foggydays may play spoilsport."
+   }
+  ],
+  "retrieval_ms": 281.3,
+  "generation_ms": 2024.2
+ },
+ {
+  "query": "who is the greatest footballer of all time, in your personal opinion",
+  "answer": "Lionel Messi is widely regarded as the greatest footballer of all time. [P1][P3][P4][P5]",
+  "status": "answered",
+  "cited": [
+   1,
+   3,
+   4,
+   5
+  ],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "5232264",
+    "score": 6.463,
+    "text": "There are many debates over who the greatest soccer players are of all time; but players like Zinedine Zidane, Diego Maradona, Michel Platini, Lionel Messi, and Roberto Baggio make almost every list. Click here to read the rest of this article."
+   },
+   {
+    "label": "P2",
+    "pid": "5036734",
+    "score": 6.248,
+    "text": "To take one example out of thousands, Cristiano Ronaldo once said: \u201cPele is the greatest player in football history, and there will only be one Pele.\u201d By the time Ronaldo was born in 1985, Pele had already been retired for eight years."
+   },
+   {
+    "label": "P3",
+    "pid": "8218252",
+    "score": 6.008,
+    "text": "Lionel Andr\u00e9s Messi Cuccittini is an Argentine professional footballer who plays as a forward for Spanish club Barcelona and the Argentina national team. Often considered the best player in the world and regarded by many as the greatest of all time, Messi has a record-tying five Ballon d'Or awards, four of which he won consecutively, and a record-tying four European Golden Shoes. He has spent his entire professional career with Barcelona, where he has won 29 trophies, including eight La ..."
+   },
+   {
+    "label": "P4",
+    "pid": "4442926",
+    "score": 4.769,
+    "text": "Often considered the best player in the world and rated by many in the sport as the greatest of all time, Messi is the only football player in history to win the FIFA Ballon d'Or four times, all of which he won consecutively, and the first player to win three European Golden Shoes.hile Barcelona began a gradual decline, the 19-year-old Messi established himself as one of the best players in the world during the 2006\u201307 campaign. Already an idol to the cules, cul\u00e9s the'club s, supporters he scored 17 goals in 36 games across all. competitions"
+   },
+   {
+    "label": "P5",
+    "pid": "8347851",
+    "score": 4.616,
+    "text": "Pronto Magazine. Lionel Messi is considered the greatest soccer player in the world. As a standout striker for La Liga giant Barcelona, the 26-year-old continues to rack up individual honors, most recently winning his fourth Ballon d'Or Award while also being tabbed the 2013 AP Soccer Player of the Year."
+   }
+  ],
+  "retrieval_ms": 369.3,
+  "generation_ms": 3889.4
+ },
+ {
+  "query": "how many leaves are on the oak tree outside the Smithfield library",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "4671065",
+    "score": -1.875,
+    "text": "Poison Ivy, Oak, and Sumac Leaves. Poison oak has leaves that look like oak leaves, usually with three leaflets but sometimes up to seven leaflets per leaf group."
+   },
+   {
+    "label": "P2",
+    "pid": "2678189",
+    "score": -2.235,
+    "text": "If a tree 50 m high has 300,000 leaves, the surface area of the leaves is 300 m2, and the amount of ground covered by the tree's canopy is 75 m2."
+   },
+   {
+    "label": "P3",
+    "pid": "4671062",
+    "score": -2.755,
+    "text": "Poison Ivy, Oak, and Sumac Leaves. Poison oak has leaves that look like oak leaves, usually with three leaflets but sometimes up to seven leaflets per leaf group. It grows as a vine or a shrub."
+   },
+   {
+    "label": "P4",
+    "pid": "4452612",
+    "score": -3.127,
+    "text": "Oak > Leaves > Leaf edges brown, center of leaf green. 1 of 7. 1  Leaves wilt, leaf edges and tips turn brown, with a green center. 2  In red oak group symptoms are first seen in the top of the canopy, disease progresses to the entire canopy and kills tree in 1 to 3 months.  Infected trees drop their leaves."
+   },
+   {
+    "label": "P5",
+    "pid": "3311972",
+    "score": -3.487,
+    "text": "Red Oak are fast growing and high quality trees that are easy to maintain and require moderate amounts of fertilizer and moisture when established. Red Oak leaves are 4 to 8 inchs long, display 5 to 7 deep lobes and have bristles on the tips of each lobe. The leaves are glossy dark green with a lighter green underside and in the fall the leaves turn a brilliant red to red-orange color."
+   }
+  ],
+  "retrieval_ms": 345.5,
+  "generation_ms": 4435.8
+ },
+ {
+  "query": "what was the third song played at the 2004 prom of Lincoln High in Kansas",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "2609590",
+    "score": -5.162,
+    "text": "Glory Of Love by Peter Cetera Songfacts. This ballad was Peter Cetera's first solo single after leaving Chicago the previous year. It was the theme song for the film The Karate Kid: Part II. It fit the movie perfectly, and was the most popular song at weddings and proms across the country that year."
+   },
+   {
+    "label": "P2",
+    "pid": "3720598",
+    "score": -5.64,
+    "text": "Format: Audio CD|Verified Purchase. 1  I'll admit right up front that I bought this CD for one song, and for one song only, Come and Get Your Love.. This is a deeply treasured classic from my central Kansas sixth-grade days at the local lunch counter, playing nickel pinball and listening to the jukebox."
+   },
+   {
+    "label": "P3",
+    "pid": "5950065",
+    "score": -6.676,
+    "text": "Kurt (Chris Colfer) and Mercedes (Amber Riley) dance at the prom. Tina (Jenna Ushkowitz), Santana (Naya Rivera) and Brittany (Heather Morris) perform at the prom. Finn wishes Rachel luck on her performance. Rachel prepares for her college audition."
+   },
+   {
+    "label": "P4",
+    "pid": "4676561",
+    "score": -6.758,
+    "text": "The second and third singles from the album, Heavy Liftin' and Playboys of the Southwestern World, each cracked the top 50, and The Dreamer went gold. In 2004, Blake Shelton began releasing a string of hit albums, beginning with Blake Shelton\u2019s Barn & Grill. The second single from the album, Some Beach, became his third No. 1 hit, and the singles Goodbye Time and Nobody but Me reached top 10, sending the album to gold status. Along with the album, Shelton released an accompanying video collection, Blake Shelton's Barn & Grill: A Video Collection."
+   },
+   {
+    "label": "P5",
+    "pid": "3962591",
+    "score": -6.797,
+    "text": "The Three Degrees performed the song at Prince Charles ' 30th birthday party at Buckingham Palace in 1978. Sheila Ferguson recalled that the song was played to me by Kenny Gamble at the piano in 1973 and I threw a tantrum. I screamed and yelled and said I would never sing it."
+   }
+  ],
+  "retrieval_ms": 484.6,
+  "generation_ms": 4496.7
+ },
+ {
+  "query": "what was the exact temperature in Reykjavik at 3:47 pm on 9 March 2011",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "2699347",
+    "score": 1.594,
+    "text": "Reykjavik: Annual Weather Averages. July is the hottest month in Reykjavik with an average temperature of 11\u00b0C (52\u00b0F) and the coldest is January at 0\u00b0C (32\u00b0F) with the most daily sunshine hours at 12 in March.The wettest month is January with an average of 50mm of rain.eykjavik: Annual Weather Averages. July is the hottest month in Reykjavik with an average temperature of 11\u00b0C (52\u00b0F) and the coldest is January at 0\u00b0C (32\u00b0F) with the most daily sunshine hours at 12 in March."
+   },
+   {
+    "label": "P2",
+    "pid": "1360749",
+    "score": 0.661,
+    "text": "The highest recorded temperature in January, 13.6\u00b0C (56.5\u00b0F), was at Skjald\u00feingssta\u00f0ir, East Iceland, on January 5, and the lowest, -26.0\u00b0C (-14.8\u00b0F), at Setur in the central highlands on January 11. The precipitation in Reykjav\u00edk was 127.3 mm, which is nearly 70 percent above the average for January."
+   },
+   {
+    "label": "P3",
+    "pid": "8604476",
+    "score": 0.209,
+    "text": "Although you can expect warmth and sun, you can also expect cloud, wind and rain. In July, the temperature in Reykjav\u00edk averages at just under 12\u00b0 Celsius, but has been recorded as high as 25.7\u00b0 and as low as 3.5\u00b0 since the turn of the millennium."
+   },
+   {
+    "label": "P4",
+    "pid": "2918952",
+    "score": -0.47,
+    "text": "The lowest temperature was -38\u00b0C (- 36.4\u00b0F) in 1918 at Grimssta\u00f0ir gr\u00edmssta\u00f0ir in the northeast Of. Iceland temperature records For reykjavik are.24\u00b08 (c.76\u00b06) f on 11 august, 2004 -and.24\u00b05 (-c.12\u00b01) f on 21 january. 1918 you can also check the current local weather conditions In. iceland"
+   },
+   {
+    "label": "P5",
+    "pid": "2837066",
+    "score": -0.526,
+    "text": "Check the Weather in Iceland in March before you book your next holiday. This gives the best indication of the weather in March and includes figures for temperature, sunshine and rainfall. The Iceland march weather guide shown below is for Reykjavik. 1  2\u00b0C max day temperature."
+   }
+  ],
+  "retrieval_ms": 408.1,
+  "generation_ms": 4432.8
+ },
+ {
+  "query": "how many keystrokes did a typist in Omaha make on 5 June 1998",
+  "answer": "I can't answer this from the available documents.",
+  "status": "refused_by_model",
+  "cited": [],
+  "passages": [
+   {
+    "label": "P1",
+    "pid": "225369",
+    "score": -6.98,
+    "text": "The fastest typing speed on an alphanumeric keyboard, 216 words in one minute, was achieved by Stella Pajunas in 1946 on an IBM electric. As of 2005, writer Barbara Blackburn was the fastest alphanumerical English language typist in the world, according to The Guinness Book of World Records."
+   },
+   {
+    "label": "P2",
+    "pid": "3190612",
+    "score": -7.148,
+    "text": "Below are a few facts about typing and hopefully, a few hints as to why it is so important. The fastest typist in the world was a woman named Barbara Blackburn. In 2005, using a Simplified Dvorak keyboard, she was able to sustain 150 words per minute for 50 minute, and 170 words per minute for shorter amounts of time."
+   },
+   {
+    "label": "P3",
+    "pid": "1212196",
+    "score": -7.711,
+    "text": "The highest typing speed ever recorded was 216 words per minute (wpm), set by Stella Pajunas in 1946, using an IBM electric typewriter. Currently, the fastest English language typist is Barbara Blackburn, who reached a peak typing speed of 212 wpm during a test in 2005, using a Dvorak simplified keyboard."
+   },
+   {
+    "label": "P4",
+    "pid": "6236156",
+    "score": -7.837,
+    "text": "average data entry keystrokes per hour salaries the average salary for data entry keystrokes per hour jobs is $ 20000"
+   },
+   {
+    "label": "P5",
+    "pid": "8683394",
+    "score": -7.883,
+    "text": "Data entry clerks and typists use keyboard skills to enter information into databases and systems, and create letters, reports and other documents. Salary: \u00a312,000 to \u00a325,000 average per year. Hours: 35 to 40 per week."
+   }
+  ],
+  "retrieval_ms": 328.5,
+  "generation_ms": 3608.6
+ }
+]

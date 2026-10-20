@@ -1,0 +1,21 @@
+﻿qid,label,note
+165480,supported,thin: omits P3 potassium-toxicity link
+153588,supported,
+241246,supported,"sources conflict (P1 5 min / P3-P4 4-6 min / P2 30 min); answer gives only the max"
+251445,supported,"1-3 days is the implantation process length in P1/P2; answer applies it to the cramping (small inference); low-quality sources"
+208339,supported,"right species (P4 dwarf, P2 spectacled); 'occasionally up to 3 m' stronger than P2 'potentially'; gives max not typical size; two claims in one sentence"
+113826,supported,"'currently' is in P1 but P1 is about 2015; answer drops the date so it reads as current (stale); fad diet and weight loss diet merged"
+85954,supported,"matches P3 (1900) and P4 (1950); ignores world data in P1/P2; scope (US?) not stated in passages or answer; dated"
+21948,supported,"both claims in cited passages (P3, P1); triathlon advice generalized to the question"
+11006,supported,P1 cast list names Olivia Taylor Dudley
+1215,supported but wrong citation,"provincial clause cited P2 (municipal); support is in P3/P5; first attempt used education/health claims not in any passage"
+203646,unsupported,"'shaping the sport as it developed in the United States' is in no passage; connects P1 and P2 facts; 'originated' stronger than 'traces back'"
+23285,refused,"no passage on grading; P2/P4 cover land clearing for farming, P1 land cost; refusal defensible; candidate for partial-answer experiment"
+291516,refused,over-refusal: gold P1 gives 352 pages
+293992,refused,borderline: only brand counts (500+ worldwide); no 'product lines' figure
+471705,refused,borderline: no passage defines parasympathetic dominance alone
+988743,refused,correct: gold is a Harley-Davidson dealer (label quirk)
+1085348,refused,over-refusal (inference): P1 sheriff's office in Polson implies Lake County
+1100138,refused,over-refusal (partial): P1 gives hottest and coldest month temps
+601684,refused,"over-refusal: P1/P2/P5 say Mediterranean/southern Europe; question asked 'country'"
+1096006,refused,"correct: passages are about driver earnings; high score 10.25 but not an answer"
