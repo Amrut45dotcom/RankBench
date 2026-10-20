@@ -18,6 +18,14 @@ RETRY_NOTE = ("\n\nYour previous reply was rejected by an automatic format check
               "cite only the listed passages, or reply with exactly INSUFFICIENT_CONTEXT.")
 REFUSAL_TEXT = "I can't answer this from the available documents."
 
+# Level 2: permission strategies
+#   none       no filtering (Level 1 behaviour, and the leak-test control)
+#   post       retrieve top-k, drop forbidden candidates (may return fewer than k)
+#   oversample retrieve 10x k, drop forbidden candidates, cut back to k
+#   pre        restrict the search to allowed passages from the start
+STRATEGIES = ("none", "post", "oversample", "pre")
+OVERSAMPLE = 10
+
 
 class Pipeline:
     def __init__(self, G0, L1, *, pid_list, index, bm25, dense, reranker, groq_client,
@@ -29,13 +37,71 @@ class Pipeline:
         self.qrels = qrels or {}
         self.qtext = {}                      # filled by load_pipeline (CLI only)
         self._lock = threading.Lock()        # one retrieval at a time: FAISS and GPU models are shared
+        # Level 2 permission state
+        self.mask_fn = None                  # maps a user to a bool mask over the 1M rows
+        self._masks = {}                     # user -> bool mask
+        self._sel = {}                       # user -> (SearchParameters, selector, packed bits)
+        self._pid_idx_map = None
+
+    # ---------- Level 2: permission helpers ----------
+    def set_permissions(self, mask_fn):
+        """mask_fn(user) -> bool array of length 1,000,000 in pid_list order."""
+        self.mask_fn = mask_fn
+        self._masks.clear()
+        self._sel.clear()
+
+    def _get_mask(self, user):
+        if user not in self._masks:
+            m = np.asarray(self.mask_fn(user))
+            assert m.dtype == bool and m.shape[0] == len(self.pid_list), "bad permission mask"
+            self._masks[user] = m
+        return self._masks[user]
+
+    def _get_selector(self, user, mask):
+        import faiss
+        if user not in self._sel:
+            packed = np.packbits(mask, bitorder="little")
+            sel = faiss.IDSelectorBitmap(len(mask), faiss.swig_ptr(packed))
+            params = faiss.SearchParameters()
+            params.sel = sel
+            # keep all three alive, or FAISS reads freed memory
+            self._sel[user] = (params, sel, packed)
+        return self._sel[user][0]
+
+    def _pid_idx(self, pid):
+        if self._pid_idx_map is None:
+            self._pid_idx_map = {p: i for i, p in enumerate(self.pid_list)}
+        return self._pid_idx_map[pid]
+
+    @staticmethod
+    def _bm25_pre(bm25, tokens, mask, k):
+        """BM25 top-k restricted to allowed rows: score everything, mask, take top-k."""
+        k = min(k, int(mask.sum()))
+        if k == 0:
+            return np.array([], dtype=int), np.array([], dtype=np.float32)
+        s = np.where(mask, np.asarray(bm25.get_scores(tokens), dtype=np.float32), -np.inf)
+        top = np.argpartition(-s, k - 1)[:k]
+        top = top[np.argsort(-s[top])]
+        return top, s[top]
 
     # ---------- retrieval: BM25 + dense -> RRF -> rerank (single query) ----------
-    def retrieve(self, query, n_out):
+    def retrieve(self, query, n_out, user=None, strategy="none"):
+        return self.retrieve_traced(query, n_out, user, strategy)[0]
+
+    def retrieve_traced(self, query, n_out, user=None, strategy="none"):
+        """Returns (passages, trace). trace lists the pids at each stage (for audit log and leak tests)."""
         import bm25s                         # imported here, not at the top, so the CLI can set
         from ranx import Run, fuse           # CUDA_VISIBLE_DEVICES before anything heavy loads
+        if strategy not in STRATEGIES:
+            raise ValueError(f"unknown strategy {strategy}")
         G0 = self.G0
         K = G0["topk"]
+        mask = None
+        if strategy != "none":
+            if user is None or self.mask_fn is None:
+                raise ValueError("a user and set_permissions() are required for filtered strategies")
+            mask = self._get_mask(user)
+        mult = OVERSAMPLE if strategy == "oversample" else 1
         with self._lock:
             texts = [query]
             try:
@@ -44,25 +110,56 @@ class Pipeline:
             except TypeError:  # older bm25s
                 toks = bm25s.tokenize(texts, stopwords=G0["bm25_tokenize"]["stopwords"],
                                       stemmer=self.stemmer, return_ids=False, show_progress=False)
-            idx, sc = self.bm25.retrieve(toks, k=K["bm25"], n_threads=G0["hardware"]["bm25_threads"],
-                                         show_progress=False)
-            bm = {self.pid_list[i]: float(s) for i, s in zip(idx[0], sc[0])}
 
+            # ---- BM25 candidates (filtered BEFORE fusion) ----
+            if strategy == "pre":
+                b_idx, b_sc = self._bm25_pre(self.bm25, toks[0], mask, K["bm25"])
+            else:
+                idx, sc = self.bm25.retrieve(toks, k=K["bm25"] * mult,
+                                             n_threads=G0["hardware"]["bm25_threads"],
+                                             show_progress=False)
+                b_idx, b_sc = np.asarray(idx[0]), np.asarray(sc[0])
+                if mask is not None:
+                    keep = mask[b_idx]
+                    b_idx, b_sc = b_idx[keep][:K["bm25"]], b_sc[keep][:K["bm25"]]
+            bm = {self.pid_list[i]: float(s) for i, s in zip(b_idx, b_sc)}
+
+            # ---- dense candidates (filtered BEFORE fusion) ----
             emb = self.dense.encode([G0["models"]["query_prefix"] + query], normalize_embeddings=True,
                                     convert_to_numpy=True, show_progress_bar=False).astype(np.float32)
-            D, I = self.index.search(emb, K["dense"])
-            de = {self.pid_list[i]: float(d) for i, d in zip(I[0], D[0])}
+            if strategy == "pre":
+                D, I = self.index.search(emb, K["dense"], params=self._get_selector(user, mask))
+                d_idx, d_sc = I[0], D[0]
+                keep = d_idx >= 0            # FAISS pads with -1 when fewer than k are allowed
+                d_idx, d_sc = d_idx[keep], d_sc[keep]
+            else:
+                D, I = self.index.search(emb, K["dense"] * mult)
+                d_idx, d_sc = I[0], D[0]
+                if mask is not None:
+                    keep = mask[d_idx]
+                    d_idx, d_sc = d_idx[keep][:K["dense"]], d_sc[keep][:K["dense"]]
+            de = {self.pid_list[i]: float(d) for i, d in zip(d_idx, d_sc)}
 
-            fused = fuse(runs=[Run({"q": bm}, name="bm25"), Run({"q": de}, name="dense")],
-                         norm="min-max", method="rrf", params={"k": K["rrf_k"]}).to_dict()["q"]
+            trace = {"bm25_ids": list(bm), "dense_ids": list(de)}
+            runs = [Run({"q": r}, name=n) for n, r in (("bm25", bm), ("dense", de)) if r]
+            if not runs:
+                trace.update(rerank_input_ids=[], final_ids=[])
+                return [], trace
+
+            fused = fuse(runs=runs, norm="min-max", method="rrf", params={"k": K["rrf_k"]}).to_dict()["q"]
             cands = sorted(fused.items(), key=lambda x: -x[1])[:K["rrf_out"]]
             pids = [p for p, _ in cands[:K["rerank_depth"]]]
+            if mask is not None:             # last line of defence: nothing forbidden reaches the reranker
+                bad = [p for p in pids if not mask[self._pid_idx(p)]]
+                assert not bad, f"LEAK before rerank: {bad[:3]}"
             ptexts = self.get_texts(pids)
             scores = self.reranker.predict([(query, t) for t in ptexts],
                                            batch_size=G0["batching"]["rerank_batch"],
                                            show_progress_bar=False)
             ranked = sorted(zip(pids, ptexts, scores), key=lambda x: -x[2])
-            return [{"pid": p, "text": t, "score": float(s)} for p, t, s in ranked[:n_out]]
+            out = [{"pid": p, "text": t, "score": float(s)} for p, t, s in ranked[:n_out]]
+            trace.update(rerank_input_ids=pids, final_ids=[o["pid"] for o in out])
+            return out, trace
 
     # ---------- generation ----------
     @staticmethod
@@ -89,10 +186,18 @@ class Pipeline:
                                       "include_reasoning": False})
         return (resp.choices[0].message.content or "").strip()
 
-    def answer(self, query, qid=None):
+    def answer(self, query, qid=None, user=None, strategy="none"):
         t0 = time.perf_counter()
-        passages = self.retrieve(query, self.L1["n_passages"])
+        passages, trace = self.retrieve_traced(query, self.L1["n_passages"], user, strategy)
         t1 = time.perf_counter()
+        if not passages:   # nothing allowed: never call the LLM with an empty passage list
+            return {
+                "qid": qid, "query": query, "answer": REFUSAL_TEXT,
+                "status": "refused_no_passages", "refused": True,
+                "reasons": [], "attempts": 0, "cited": [], "raw_answer": "",
+                "attempt_log": [], "passages": [], "trace": trace,
+                "retrieval_ms": round((t1 - t0) * 1000, 1), "generation_ms": 0.0,
+            }
         raw = self.call_llm(query, passages)
         v = validate(raw, len(passages))
         attempts = 1
@@ -117,7 +222,7 @@ class Pipeline:
             "status": status, "refused": status != "answered",
             "reasons": v["reasons"], "attempts": attempts,
             "cited": v["cited"], "raw_answer": raw, "attempt_log": attempt_log,
-            "passages": passages,
+            "passages": passages, "trace": trace,
             "retrieval_ms": round((t1 - t0) * 1000, 1),
             "generation_ms": round((t2 - t1) * 1000, 1),
         }
