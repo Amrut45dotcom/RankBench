@@ -25,7 +25,9 @@ rng = np.random.default_rng(SEED)
 train_idx = np.sort(rng.choice(len(pids), TRAIN_N, replace=False))
 train = np.ascontiguousarray(emb[train_idx], dtype="float32")
 
-km = faiss.Kmeans(train.shape[1], K, niter=25, seed=SEED, spherical=True, verbose=True)
+
+km = faiss.Kmeans(train.shape[1], K, niter=25, seed=SEED, spherical=True,
+                  verbose=True, max_points_per_centroid=50_000)
 km.train(train)
 
 tenant = np.empty(len(pids), dtype=np.uint8)
