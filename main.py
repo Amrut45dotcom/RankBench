@@ -18,13 +18,14 @@ from ranx import Run, fuse
 # ── Config ────────────────────────────────────────────────────────────────────
 INDEX_PATH      = "faiss_index/bge_large_1M.index"
 PID_LIST_PATH   = "embeddings/pid_list.npy"
-BM25_INDEX_DIR  = "bm25_index"
+BM25_INDEX_DIR  = "bm25_index_1M"
 CORPUS_PKL      = "corpus.npy"          # see note below
 BGE_MODEL       = "BAAI/bge-large-en-v1.5"
 RERANKER_MODEL  = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 DEVICE          = "cuda"
 TOP_K_RETRIEVE  = 1000   # first-stage retrieval
 TOP_K_RRF       = 100    # RRF cut before reranking
+TOP_K_RRF_INPUT = 100    # BM25 and dense candidates fed into RRF (matches the Gate 0 baseline)
 TOP_K_FINAL     = 5      # results returned per strategy
 
 LATENCY_WINDOW  = 100    # rolling window size for /metrics
@@ -183,6 +184,9 @@ def _run_dense(query: str) -> tuple[dict, float]:
 
 def _run_rrf(bm25_dict: dict, dense_dict: dict) -> tuple[dict, float]:
     t0 = time.time()
+    # keep only the top candidates from each list, to match the Gate 0 baseline (100 + 100)
+    bm25_dict  = dict(sorted(bm25_dict.items(),  key=lambda x: x[1], reverse=True)[:TOP_K_RRF_INPUT])
+    dense_dict = dict(sorted(dense_dict.items(), key=lambda x: x[1], reverse=True)[:TOP_K_RRF_INPUT])
     # ranx fuse expects Run objects
     # Use a dummy qid since we're doing single-query fusion
     QID = "q0"

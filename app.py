@@ -12,10 +12,10 @@ STRATEGY_LABELS = {
 }
 
 STRATEGY_METRICS = {
-    "bm25":     {"NDCG@10": "0.2141", "MRR@10": "0.1705", "Recall@10": "0.3613"},
-    "dense":    {"NDCG@10": "0.7118", "MRR@10": "0.6632", "Recall@10": "0.8771"},
-    "rrf":      {"NDCG@10": "0.5933", "MRR@10": "0.5266", "Recall@10": "0.8190"},
-    "reranker": {"NDCG@10": "0.5561", "MRR@10": "0.4824", "Recall@10": "0.8030"},
+    "bm25":     {"NDCG@10": "0.4445", "MRR@10": "0.3978", "Recall@100": "0.8042"},
+    "dense":    {"NDCG@10": "0.7108", "MRR@10": "0.6622", "Recall@100": "0.9752"},
+    "rrf":      {"NDCG@10": "0.6060", "MRR@10": "0.5512", "Recall@100": "0.9727"},
+    "reranker": {"NDCG@10": "0.7538", "MRR@10": "0.7093", "Recall@100": "0.9727"},
 }
 
 
@@ -314,6 +314,13 @@ button.primary:hover { background: #1d4ed8 !important; }
 
 .metrics-table tr:hover td { background: #111827; }
 
+.note {
+    padding: 0.75rem 2rem;
+    font-size: 0.72rem;
+    color: #64748b;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
 /* hide gradio chrome */
 footer { display: none !important; }
 .gr-panel { background: transparent !important; border: none !important; }
@@ -345,6 +352,10 @@ with gr.Blocks(title="RankBench") as demo:
         dense_out    = gr.HTML(label="Dense")
         rrf_out      = gr.HTML(label="RRF")
         reranker_out = gr.HTML(label="Reranker")
+
+    gr.HTML('<div class="note">Metrics: Gate 0 matched baseline, 6,780 final queries, 1M-passage subset '
+            '(qrels passages plus a random sample), so not comparable to published MS MARCO results. '
+            'Latency shown per query on a shared server is noisy.</div>')
 
     gr.HTML('<div class="metrics-section"><h3>Latency Metrics (last 100 requests)</h3>')
     metrics_out = gr.HTML()
