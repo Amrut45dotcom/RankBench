@@ -297,7 +297,8 @@ def load_pipeline(config_path):
     """Standalone: load every model and index (what the old answer.py did at import time)."""
     L1, G0 = _read_configs(config_path)
     # GPU must be chosen before torch is imported
-    os.environ["CUDA_VISIBLE_DEVICES"] = str(G0["hardware"]["gpu_id"])
+    # a CUDA_VISIBLE_DEVICES already set in the shell wins; otherwise fall back to gpu_id from the config
+    os.environ.setdefault("CUDA_VISIBLE_DEVICES", str(G0["hardware"]["gpu_id"]))
     import faiss
     import torch
     import ir_datasets
