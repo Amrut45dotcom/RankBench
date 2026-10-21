@@ -32,6 +32,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--answer", action="store_true", help="also run the LLM and check cited ids and answer text")
 ap.add_argument("--topical-per-persona", type=int, default=8)
 ap.add_argument("--seed", type=int, default=42)
+ap.add_argument("--max-tests", type=int, default=0, help="debug: only the first N tests")
 args = ap.parse_args()
 
 pipe = load_pipeline(f"{H}/rankbench_v2/level1/config.yaml")
@@ -69,6 +70,8 @@ for name in TOPICAL_PERSONAS:
     pick = rng.choice(hidden, size=min(args.topical_per_persona, len(hidden)), replace=False)
     for qid in pick:
         tests.append({"category": "gold_hidden", "persona": name, "qid": str(qid), "query": pipe.qtext[str(qid)]})
+if args.max_tests:
+    tests = tests[:args.max_tests]
 print(f"\n{len(tests)} tests (query, persona) x {len(STRATS)} strategies", flush=True)
 
 # ---------------- run ----------------
@@ -97,13 +100,20 @@ for n, t in enumerate(tests, 1):
             row["guard_fired"] = True
             row["error"] = str(e)
         if args.answer and not row["guard_fired"]:
-            res = pipe.answer(q, qid=t["qid"], user=user, strategy=s)
-            cited = AuditLog._cited_ids(res)
-            cited_bad = [p for p in cited if not mask[pidx[p]]]
-            text = (res.get("answer") or "") + " " + (res.get("raw_answer") or "")
-            overlap = bool(pool & shingles(text))
-            row["answer_leak"] = bool(cited_bad or overlap)
-            row["cited_forbidden"], row["text_overlap"], row["status"] = cited_bad, overlap, res["status"]
+            try:
+                res = pipe.answer(q, qid=t["qid"], user=user, strategy=s)
+            except AssertionError as e:      # the leak guard fired inside answer(): a finding, not a network error
+                row["guard_fired"], row["error"], res = True, str(e), None
+            except Exception as e:           # Groq/network problem: record it and keep going
+                row["answer_error"] = f"{type(e).__name__}: {e}"[:300]
+                res = None
+            if res is not None:
+                cited = AuditLog._cited_ids(res)
+                cited_bad = [p for p in cited if not mask[pidx[p]]]
+                text = (res.get("answer") or "") + " " + (res.get("raw_answer") or "")
+                overlap = bool(pool & shingles(text))
+                row["answer_leak"] = bool(cited_bad or overlap)
+                row["cited_forbidden"], row["text_overlap"], row["status"] = cited_bad, overlap, res["status"]
         row["leaked"] = bool(row["leaks"]) or row["guard_fired"] or bool(row["answer_leak"])
         rows.append(row)
     if n % 25 == 0:
@@ -112,7 +122,8 @@ for n, t in enumerate(tests, 1):
 # ---------------- summary ----------------
 summary = {"tests": len(tests), "strategies": {}, "by_category": {}, "answer_level": args.answer,
            "control_unfiltered_leaking_tests": control_leaks, "dev_split": dev_path,
-           "seed": args.seed}
+           "seed": args.seed,
+           "answer_errors": sum(1 for r in rows if r.get("answer_error"))}
 for s in STRATS:
     rs = [r for r in rows if r["strategy"] == s]
     summary["strategies"][s] = {
