@@ -93,8 +93,11 @@ class Pipeline:
     def retrieve(self, query, n_out, user=None, strategy="none"):
         return self.retrieve_traced(query, n_out, user, strategy)[0]
 
-    def retrieve_traced(self, query, n_out, user=None, strategy="none"):
-        """Returns (passages, trace). trace lists the pids at each stage (for audit log and leak tests)."""
+    def retrieve_traced(self, query, n_out, user=None, strategy="none", rerank=True):
+        """Returns (passages, trace). trace lists the pids at each stage (for audit log and leak tests).
+
+        rerank=False stops after RRF fusion (used for the retrieval-only comparison): passages then
+        carry fusion scores and no text, and nothing is sent to the reranker."""
         import bm25s                         # imported here, not at the top, so the CLI can set
         from ranx import Run, fuse           # CUDA_VISIBLE_DEVICES before anything heavy loads
         if strategy not in STRATEGIES:
@@ -108,6 +111,7 @@ class Pipeline:
             mask = self._get_mask(user)
         mult = OVERSAMPLE if strategy == "oversample" else 1
         with self._lock:
+            t_start = time.perf_counter()
             texts = [query]
             try:
                 toks = bm25s.tokenize(texts, stopwords=G0["bm25_tokenize"]["stopwords"],
@@ -148,7 +152,7 @@ class Pipeline:
             trace = {"bm25_ids": list(bm), "dense_ids": list(de)}
             runs = [Run({"q": r}, name=n) for n, r in (("bm25", bm), ("dense", de)) if r]
             if not runs:
-                trace.update(rerank_input_ids=[], final_ids=[])
+                trace.update(fused_ids=[], rerank_input_ids=[], final_ids=[], ms_retrieval=0.0, ms_rerank=0.0)
                 return [], trace
 
             fused = fuse(runs=runs, norm="min-max", method="rrf", params={"k": K["rrf_k"]}).to_dict()["q"]
@@ -157,13 +161,22 @@ class Pipeline:
             if mask is not None:             # last line of defence: nothing forbidden reaches the reranker
                 bad = [p for p in pids if not mask[self._pid_idx(p)]]
                 assert not bad, f"LEAK before rerank: {bad[:3]}"
+            t_fused = time.perf_counter()
+            trace["fused_ids"] = pids        # RRF output in fusion order (retrieval-only metrics use this)
+            if not rerank:
+                out = [{"pid": p, "text": None, "score": float(s)} for p, s in cands[:n_out]]
+                trace.update(rerank_input_ids=pids, final_ids=[o["pid"] for o in out],
+                             ms_retrieval=(t_fused - t_start) * 1000, ms_rerank=0.0)
+                return out, trace
             ptexts = self.get_texts(pids)
             scores = self.reranker.predict([(query, t) for t in ptexts],
                                            batch_size=G0["batching"]["rerank_batch"],
                                            show_progress_bar=False)
             ranked = sorted(zip(pids, ptexts, scores), key=lambda x: -x[2])
             out = [{"pid": p, "text": t, "score": float(s)} for p, t, s in ranked[:n_out]]
-            trace.update(rerank_input_ids=pids, final_ids=[o["pid"] for o in out])
+            trace.update(rerank_input_ids=pids, final_ids=[o["pid"] for o in out],
+                         ms_retrieval=(t_fused - t_start) * 1000,
+                         ms_rerank=(time.perf_counter() - t_fused) * 1000)
             return out, trace
 
     # ---------- generation ----------
