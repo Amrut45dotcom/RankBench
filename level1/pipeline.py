@@ -42,6 +42,7 @@ class Pipeline:
         self._masks = {}                     # user -> bool mask
         self._sel = {}                       # user -> (SearchParameters, selector, packed bits)
         self._pid_idx_map = None
+        self.audit = None                    # set by set_audit(); an AuditLog or None
 
     # ---------- Level 2: permission helpers ----------
     def set_permissions(self, mask_fn):
@@ -49,6 +50,10 @@ class Pipeline:
         self.mask_fn = mask_fn
         self._masks.clear()
         self._sel.clear()
+
+    def set_audit(self, audit_logger):
+        """audit_logger: an AuditLog (level2/audit.py) or None to switch logging off."""
+        self.audit = audit_logger
 
     def _get_mask(self, user):
         if user not in self._masks:
@@ -187,6 +192,19 @@ class Pipeline:
         return (resp.choices[0].message.content or "").strip()
 
     def answer(self, query, qid=None, user=None, strategy="none"):
+        t0 = time.perf_counter()
+        try:
+            res = self._answer(query, qid, user, strategy)
+        except Exception as e:      # a failed request (for example the leak assert) is logged too
+            if self.audit is not None:
+                self.audit.log(user, strategy, query, None,
+                               round((time.perf_counter() - t0) * 1000, 1), error=f"{type(e).__name__}: {e}")
+            raise
+        if self.audit is not None:
+            self.audit.log(user, strategy, query, res, round((time.perf_counter() - t0) * 1000, 1))
+        return res
+
+    def _answer(self, query, qid=None, user=None, strategy="none"):
         t0 = time.perf_counter()
         passages, trace = self.retrieve_traced(query, self.L1["n_passages"], user, strategy)
         t1 = time.perf_counter()
