@@ -158,7 +158,10 @@ class Pipeline:
                 trace.update(fused_ids=[], rerank_input_ids=[], final_ids=[], ms_retrieval=0.0, ms_rerank=0.0)
                 return [], trace
 
-            fused = fuse(runs=runs, norm="min-max", method="rrf", params={"k": K["rrf_k"]}).to_dict()["q"]
+            if len(runs) == 1:   # one retriever found nothing (e.g. query with no BM25 tokens): fuse() needs two runs
+                fused = dict(bm if bm else de)
+            else:
+                fused = fuse(runs=runs, norm="min-max", method="rrf", params={"k": K["rrf_k"]}).to_dict()["q"].to_dict()["q"]
             cands = sorted(fused.items(), key=lambda x: -x[1])[:K["rrf_out"]]
             pids = [p for p, _ in cands[:K["rerank_depth"]]]
             if mask is not None:             # last line of defence: nothing forbidden reaches the reranker
