@@ -122,7 +122,9 @@ class Pipeline:
                                       stemmer=self.stemmer, return_ids=False, show_progress=False)
 
             # ---- BM25 candidates (filtered BEFORE fusion) ----
-            if strategy == "pre":
+            if len(toks[0]) == 0:   # no usable tokens (e.g. single letters, non-Latin text): BM25 has nothing to match
+                b_idx, b_sc = np.array([], dtype=int), np.array([], dtype=np.float32)
+            elif strategy == "pre":
                 b_idx, b_sc = self._bm25_pre(self.bm25, toks[0], mask, K["bm25"])
             else:
                 idx, sc = self.bm25.retrieve(toks, k=K["bm25"] * mult,
