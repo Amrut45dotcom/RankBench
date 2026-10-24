@@ -48,6 +48,7 @@ class AuditLog:
             "retrieved_ids": trace.get("rerank_input_ids", []),   # candidates that reached the reranker
             "reranked_ids": trace.get("final_ids", []),           # top passages sent to the LLM
             "cited_ids": self._cited_ids(res),
+            "blocked_citations": res.get("blocked_citations", []),
             "status": res.get("status", "error" if error else None),
             "refused": res.get("refused"),
             "error": error,

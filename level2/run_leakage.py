@@ -155,7 +155,9 @@ for n, t in enumerate(tests, 1):
                     cited_bad = [p for p in cited if not mask[pidx[p]]]
                     text = (res.get("answer") or "") + " " + (res.get("raw_answer") or "")
                     overlap = bool(pool & shingles(text))
-                    row["answer_leak"] = bool(cited_bad or overlap)
+                    blocked = res.get("blocked_citations") or []
+                    row["answer_leak"] = bool(cited_bad or overlap or blocked)
+                    row["blocked_citations"] = blocked
                     row["cited_forbidden"], row["text_overlap"], row["status"] = cited_bad, overlap, res["status"]
         row["leaked"] = bool(row["leaks"]) or row["guard_fired"] or bool(row["answer_leak"])
         rows.append(row)

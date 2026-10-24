@@ -4,6 +4,7 @@ import threading
 import numpy as np
 import yaml
 from validator import validate, clean_for_display
+from citation_guard import blocked_citations
 
 SYSTEM_PROMPT = """You answer questions using only the numbered passages provided.
 Rules:
@@ -239,6 +240,21 @@ class Pipeline:
             attempts = 2
             attempt_log.append({"raw": raw, "status": v["status"], "reasons": v["reasons"]})
         t2 = time.perf_counter()
+        blocked = []
+        if user is not None and self.mask_fn is not None:
+            mask = self._get_mask(user)
+            blocked = blocked_citations(v["cited"], passages,
+                                        lambda p: mask[self._pid_idx(p)])
+        if blocked:
+            return {
+                "qid": qid, "query": query, "answer": REFUSAL_TEXT,
+                "status": "refused_citation_blocked", "refused": True,
+                "reasons": [], "attempts": attempts, "cited": [], "raw_answer": "",
+                "attempt_log": [], "passages": [], "trace": trace,
+                "blocked_citations": blocked,
+                "retrieval_ms": round((t1 - t0) * 1000, 1),
+                "generation_ms": round((t2 - t1) * 1000, 1),
+            }
         if v["status"] == "ok":
             status, text = "answered", clean_for_display(raw).strip()
         elif v["status"] == "refused":
