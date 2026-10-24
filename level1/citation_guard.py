@@ -11,10 +11,13 @@ def blocked_citations(cited, passages, is_allowed):
     """
     out = []
     for c in cited or []:
-        m = re.findall(r"\d+", str(c))
-        if not m:
-            continue
-        n = int(m[0])
+        if isinstance(c, int) and not isinstance(c, bool):
+            n = c
+        else:
+            m = re.findall(r"\d+", str(c))
+            if not m:
+                continue
+            n = int(m[0])
         if not 1 <= n <= len(passages):
             continue
         pid = passages[n - 1]["pid"]
