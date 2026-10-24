@@ -32,6 +32,8 @@ ap.add_argument("--seed", type=int, default=42)
 ap.add_argument("--max-tests", type=int, default=0, help="debug: only the first N tests")
 ap.add_argument("--strategies", default=",".join(STRATS), help="comma list, subset of post,oversample,pre")
 ap.add_argument("--resume", default=None, help="earlier *_answer.json: reuse its answered rows (skips those Groq calls)")
+ap.add_argument("--attacks", default="attacks.json",
+                help="attack file inside level2/ (default: the frozen attacks.json)")
 args = ap.parse_args()
 
 STRATS_RUN = tuple(s.strip() for s in args.strategies.split(",") if s.strip())
@@ -83,8 +85,9 @@ def answer_with_retry(q, qid, user, s):
 
 # ---------------- build the tests ----------------
 tests = []
-attacks_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "attacks.json")
-attacks = json.load(open(attacks_path, encoding="utf-8"))
+attacks_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), args.attacks)
+with open(attacks_path, encoding="utf-8") as f:
+    attacks = json.load(f)
 for cat, qs in attacks.items():
     for q in qs:
         for name in NON_ADMIN:
