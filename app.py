@@ -1,6 +1,7 @@
 import gradio as gr
 import httpx
 import json
+import html
 
 API_BASE = "http://localhost:8000"
 
@@ -12,10 +13,10 @@ STRATEGY_LABELS = {
 }
 
 STRATEGY_METRICS = {
-    "bm25":     {"NDCG@10": "0.2141", "MRR@10": "0.1705", "Recall@10": "0.3613"},
-    "dense":    {"NDCG@10": "0.7118", "MRR@10": "0.6632", "Recall@10": "0.8771"},
-    "rrf":      {"NDCG@10": "0.5933", "MRR@10": "0.5266", "Recall@10": "0.8190"},
-    "reranker": {"NDCG@10": "0.5561", "MRR@10": "0.4824", "Recall@10": "0.8030"},
+    "bm25":     {"NDCG@10": "0.4445", "MRR@10": "0.3978", "Recall@100": "0.8042"},
+    "dense":    {"NDCG@10": "0.7108", "MRR@10": "0.6622", "Recall@100": "0.9752"},
+    "rrf":      {"NDCG@10": "0.6060", "MRR@10": "0.5512", "Recall@100": "0.9727"},
+    "reranker": {"NDCG@10": "0.7538", "MRR@10": "0.7093", "Recall@100": "0.9727"},
 }
 
 
@@ -112,6 +113,41 @@ def run_query(query: str):
     metrics_html  = fetch_metrics_html()
 
     return bm25_html, dense_html, rrf_html, reranker_html, metrics_html
+
+
+ASK_PERSONAS = ["guest", "hr_intern", "hr_manager", "finance_analyst", "finance_manager", "legal_manager"]
+
+
+def run_answer(persona: str, question: str) -> str:
+    """Call the permission-aware /answer route. Nothing from error bodies is shown."""
+    def box(msg, color="#94a3b8"):
+        return f"<p style='color:{color};padding:1rem'>{html.escape(msg)}</p>"
+
+    if not question.strip():
+        return box("Enter a question.")
+    try:
+        resp = httpx.post(f"{API_BASE}/answer",
+                          json={"query": question, "persona": persona}, timeout=120)
+    except httpx.ConnectError:
+        return box("Cannot connect to backend. Is the FastAPI server running?", "#ef4444")
+    except Exception:
+        return box("Request failed.", "#ef4444")
+    if resp.status_code == 503:
+        return box("Answer service not available.", "#ef4444")
+    if resp.status_code != 200:
+        return box(f"Request failed (HTTP {resp.status_code}).", "#ef4444")
+
+    data = resp.json()
+    label = "REFUSED" if data.get("refused") else f"ANSWER as {persona}"
+    out = (f"<div class='card'><div class='card-rank'>{html.escape(label)}</div>"
+           f"<div class='card-text' style='font-size:0.9rem;color:#e2e8f0'>"
+           f"{html.escape(data.get('answer', ''))}</div></div>")
+    for c in data.get("citations", []):
+        out += (f"<div class='card' style='margin-top:0.6rem'>"
+                f"<div class='card-rank'>[P{int(c['n'])}]</div>"
+                f"<div class='card-pid'>PID: {html.escape(str(c['pid']))}</div>"
+                f"<div class='card-text'>{html.escape(str(c['text']))}</div></div>")
+    return f"<div style='padding:0.5rem 0'>{out}</div>"
 
 
 # ── CSS ───────────────────────────────────────────────────────────────────────
@@ -314,6 +350,13 @@ button.primary:hover { background: #1d4ed8 !important; }
 
 .metrics-table tr:hover td { background: #111827; }
 
+.note {
+    padding: 0.75rem 2rem;
+    font-size: 0.72rem;
+    color: #64748b;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
 /* hide gradio chrome */
 footer { display: none !important; }
 .gr-panel { background: transparent !important; border: none !important; }
@@ -346,9 +389,24 @@ with gr.Blocks(title="RankBench") as demo:
         rrf_out      = gr.HTML(label="RRF")
         reranker_out = gr.HTML(label="Reranker")
 
+    gr.HTML('<div class="note">Metrics: Gate 0 matched baseline, 6,780 final queries, 1M-passage subset '
+            '(qrels passages plus a random sample), so not comparable to published MS MARCO results. '
+            'Latency shown per query on a shared server is noisy.</div>')
+
     gr.HTML('<div class="metrics-section"><h3>Latency Metrics (last 100 requests)</h3>')
     metrics_out = gr.HTML()
     gr.HTML('</div>')
+
+    with gr.Accordion("Ask (permission-aware)", open=True):
+        gr.HTML('<div class="note">Persona is chosen by the user and is not authenticated. Demo only. '
+                'Answers come from /answer, which filters passages for the chosen persona. '
+                'The comparison page above (/query) is unfiltered.</div>')
+        with gr.Row():
+            persona_dd = gr.Dropdown(choices=ASK_PERSONAS, value="guest", label="Persona", scale=1)
+            ask_box = gr.Textbox(placeholder="e.g. what causes thunder?", label="Question",
+                                 scale=4, lines=1)
+            ask_btn = gr.Button("Ask", variant="primary", scale=1)
+        answer_out = gr.HTML()
 
     # wire up
     search_btn.click(
@@ -361,6 +419,8 @@ with gr.Blocks(title="RankBench") as demo:
         inputs=query_box,
         outputs=[bm25_out, dense_out, rrf_out, reranker_out, metrics_out],
     )
+    ask_btn.click(fn=run_answer, inputs=[persona_dd, ask_box], outputs=answer_out)
+    ask_box.submit(fn=run_answer, inputs=[persona_dd, ask_box], outputs=answer_out)
 
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0", server_port=7860, css=CSS)

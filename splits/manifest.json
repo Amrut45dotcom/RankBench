@@ -1,0 +1,19 @@
+{
+  "dataset": "msmarco-passage/dev/small",
+  "seed": 42,
+  "pid_list_sha256": "49dd5e017d43903b6cedd493abf1433fdb96ae01c5e726c4ce1bcacead7fe113",
+  "num_queries_total": 6980,
+  "num_queries_eligible": 6980,
+  "num_queries_dropped": 0,
+  "counts": {
+    "dev": 200,
+    "final": 6780,
+    "answer_eval": 200
+  },
+  "sha256": {
+    "dev": "90bd2c752951cd399658b5ef4f24764158710e7c972a8d5c22f3d102bdaaa77f",
+    "final": "3bf0672dd8f1435b78542362b164214035e3037d015cdc7dea280732f3070cac",
+    "answer_eval": "32f56ae217a5d4cf763a0f18e50e82a9f3d01d23b81f20d6720e9912c86e74a9"
+  },
+  "rule": "Never edit these files after seeing results."
+}

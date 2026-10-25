@@ -1,0 +1,10 @@
+gate0_config: ~/rankbench_v2/gate0/config.yaml   # paths, models, GPU, BM25 settings come from here
+
+llm:
+  model: openai/gpt-oss-120b
+  temperature: 0
+  max_completion_tokens: 1500     # reasoning models spend tokens thinking, so keep this generous
+  reasoning_effort: low           # low | medium | high
+
+n_passages: 5                     # passages given to the LLM after reranking
+out_dir: results/level1           # relative to data_root
