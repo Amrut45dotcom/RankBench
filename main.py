@@ -90,15 +90,33 @@ async def lifespan(app: FastAPI):
     try:
         sys.path.insert(0, LEVEL1_DIR)
         from pipeline import build_pipeline
+        from public_view import public_view
         state["l1"] = build_pipeline(
             LEVEL1_CONFIG,
             index=state["faiss"], pid_list=state["pid_list"],
             dense=state["bge"], reranker=state["ce"],
             get_texts=lambda pids: [corpus[p] for p in pids],
         )
+        state["public_view"] = public_view
         print("       Level 1 pipeline ready.")
     except Exception as e:
         print(f"       Level 1 pipeline NOT loaded: {e!r}")
+
+    # Level 2: permissions and audit log. If this fails, /answer stays disabled (never unfiltered).
+    if state.get("l1") is not None:
+        try:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from level2.permissions import PERSONAS, load_labels, allowed_mask
+            from level2.audit import AuditLog
+            data_root = os.environ.get("RANKBENCH_DATA", os.path.expanduser("~/RankBench"))
+            tenant, level = load_labels(f"{data_root}/level2", f"{data_root}/embeddings/pid_list.npy")
+            state["l1"].set_permissions(lambda u: allowed_mask(u, tenant, level))
+            state["l1"].set_audit(AuditLog(f"{data_root}/results/level2/audit_api.jsonl"))
+            state["personas"] = {n: u for n, u in PERSONAS.items() if n != "admin"}
+            state["l1_perms"] = True
+            print("       Permissions and audit log ready.")
+        except Exception as e:
+            print(f"       Permissions NOT loaded, /answer disabled: {e!r}")
 
     print("[startup] All components loaded. Ready.")
     yield
@@ -142,6 +160,7 @@ class QueryResponse(BaseModel):
 
 class AnswerRequest(BaseModel):
     query: str
+    persona: Optional[str] = None
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -254,30 +273,20 @@ def query(req: QueryRequest):
 
 @app.post("/answer")
 def answer_route(req: AnswerRequest):
-    """Level 1: retrieve (matched 1M corpus) -> LLM answer with citations -> validator."""
+    """Permission-aware answer. The client names a persona; the server maps it to a fixed User."""
     pipe = state.get("l1")
-    if pipe is None:
-        raise HTTPException(status_code=503, detail="Level 1 pipeline not loaded")
+    if pipe is None or not state.get("l1_perms"):
+        raise HTTPException(status_code=503, detail="Answer service not available")
     q = req.query.strip()
     if not q:
         raise HTTPException(status_code=400, detail="empty query")
+    personas = state["personas"]
+    user = personas.get((req.persona or "").strip(), personas["guest"])   # unknown or admin -> guest
     try:
-        r = pipe.answer(q)
-    except Exception as e:
-        raise HTTPException(status_code=502, detail=f"answer failed: {e!r}")
-    return {
-        "query": q,
-        "answer": r["answer"],
-        "status": r["status"],
-        "cited": r["cited"],
-        "passages": [
-            {"label": f"P{i+1}", "pid": p["pid"],
-             "score": round(p["score"], 3), "text": p["text"]}
-            for i, p in enumerate(r["passages"])
-        ],
-        "retrieval_ms": r["retrieval_ms"],
-        "generation_ms": r["generation_ms"],
-    }
+        r = pipe.answer(q, user=user, strategy="pre")
+    except Exception:
+        raise HTTPException(status_code=502, detail="answer failed")      # detail goes to the audit log only
+    return state["public_view"](r)
 
 
 @app.get("/metrics")
