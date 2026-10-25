@@ -1,6 +1,7 @@
 import gradio as gr
 import httpx
 import json
+import html
 
 API_BASE = "http://localhost:8000"
 
@@ -112,6 +113,41 @@ def run_query(query: str):
     metrics_html  = fetch_metrics_html()
 
     return bm25_html, dense_html, rrf_html, reranker_html, metrics_html
+
+
+ASK_PERSONAS = ["guest", "hr_intern", "hr_manager", "finance_analyst", "finance_manager", "legal_manager"]
+
+
+def run_answer(persona: str, question: str) -> str:
+    """Call the permission-aware /answer route. Nothing from error bodies is shown."""
+    def box(msg, color="#94a3b8"):
+        return f"<p style='color:{color};padding:1rem'>{html.escape(msg)}</p>"
+
+    if not question.strip():
+        return box("Enter a question.")
+    try:
+        resp = httpx.post(f"{API_BASE}/answer",
+                          json={"query": question, "persona": persona}, timeout=120)
+    except httpx.ConnectError:
+        return box("Cannot connect to backend. Is the FastAPI server running?", "#ef4444")
+    except Exception:
+        return box("Request failed.", "#ef4444")
+    if resp.status_code == 503:
+        return box("Answer service not available.", "#ef4444")
+    if resp.status_code != 200:
+        return box(f"Request failed (HTTP {resp.status_code}).", "#ef4444")
+
+    data = resp.json()
+    label = "REFUSED" if data.get("refused") else f"ANSWER as {persona}"
+    out = (f"<div class='card'><div class='card-rank'>{html.escape(label)}</div>"
+           f"<div class='card-text' style='font-size:0.9rem;color:#e2e8f0'>"
+           f"{html.escape(data.get('answer', ''))}</div></div>")
+    for c in data.get("citations", []):
+        out += (f"<div class='card' style='margin-top:0.6rem'>"
+                f"<div class='card-rank'>[P{int(c['n'])}]</div>"
+                f"<div class='card-pid'>PID: {html.escape(str(c['pid']))}</div>"
+                f"<div class='card-text'>{html.escape(str(c['text']))}</div></div>")
+    return f"<div style='padding:0.5rem 0'>{out}</div>"
 
 
 # ── CSS ───────────────────────────────────────────────────────────────────────
@@ -361,6 +397,17 @@ with gr.Blocks(title="RankBench") as demo:
     metrics_out = gr.HTML()
     gr.HTML('</div>')
 
+    with gr.Accordion("Ask (permission-aware)", open=True):
+        gr.HTML('<div class="note">Persona is chosen by the user and is not authenticated. Demo only. '
+                'Answers come from /answer, which filters passages for the chosen persona. '
+                'The comparison page above (/query) is unfiltered.</div>')
+        with gr.Row():
+            persona_dd = gr.Dropdown(choices=ASK_PERSONAS, value="guest", label="Persona", scale=1)
+            ask_box = gr.Textbox(placeholder="e.g. what causes thunder?", label="Question",
+                                 scale=4, lines=1)
+            ask_btn = gr.Button("Ask", variant="primary", scale=1)
+        answer_out = gr.HTML()
+
     # wire up
     search_btn.click(
         fn=run_query,
@@ -372,6 +419,8 @@ with gr.Blocks(title="RankBench") as demo:
         inputs=query_box,
         outputs=[bm25_out, dense_out, rrf_out, reranker_out, metrics_out],
     )
+    ask_btn.click(fn=run_answer, inputs=[persona_dd, ask_box], outputs=answer_out)
+    ask_box.submit(fn=run_answer, inputs=[persona_dd, ask_box], outputs=answer_out)
 
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0", server_port=7860, css=CSS)
